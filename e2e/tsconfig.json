@@ -1,0 +1,11 @@
+{
+  "//": "Typechecks the E2E suite and the parity harness — both excluded from the app tsconfig so their Playwright import never reaches `next build`. Run: tsc --noEmit -p e2e/tsconfig.json",
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"],
+    "paths": { "@/*": ["../*"] }
+  },
+  "include": ["**/*.ts", "../playwright.config.ts"],
+  "exclude": ["../node_modules"]
+}

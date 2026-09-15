@@ -1,0 +1,42 @@
+{
+  "//": "Lighthouse CI (plan §6.12, §9.1, Phase 10). Run: npx -y @lhci/cli@0.15.x autorun. Needs both apps up and the DB seeded so the pages resolve.",
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:3000/",
+        "http://localhost:3000/services",
+        "http://localhost:3000/services/ai-transformation",
+        "http://localhost:3000/evoq"
+      ],
+      "numberOfRuns": 3,
+      "settings": {
+        "preset": "desktop",
+        "throttlingMethod": "simulate"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.9 }],
+        "categories:accessibility": ["error", { "minScore": 0.95 }],
+        "categories:seo": ["error", { "minScore": 0.95 }],
+        "categories:best-practices": ["warn", { "minScore": 0.95 }],
+
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2000 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0 }],
+        "total-blocking-time": ["warn", { "maxNumericValue": 200 }],
+
+        "resource-summary:script:size": ["error", { "maxNumericValue": 122880 }],
+        "resource-summary:stylesheet:size": ["error", { "maxNumericValue": 61440 }],
+        "unused-javascript": ["warn", { "maxNumericValue": 40960 }],
+
+        "uses-responsive-images": "warn",
+        "uses-text-compression": "error",
+        "modern-image-formats": "warn",
+        "efficient-animated-content": "warn",
+        "unsized-images": "error",
+        "font-display": "error"
+      }
+    },
+    "upload": { "target": "temporary-public-storage" }
+  }
+}

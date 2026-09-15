@@ -1,0 +1,389 @@
+/* evoq — the page's own rules (`.evoq-*`), verbatim from the design.
+
+   Lifted from sdl-2.0/evoq.html by tools/visual-parity/lift-page-css.mjs.
+   Re-run that script rather than editing this file. See web/styles/README.md. */
+
+.evoq-kicker {
+    display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #5636C7;
+  }
+
+.evoq-kicker .kicker-line { display: inline-block; width: 22px; height: 1px; background: #5636C7; }
+
+.evoq-kicker--dark { color: rgba(255,255,255,0.7); }
+
+.evoq-kicker--dark .kicker-line { background: #6D4FEB; }
+
+.sdl-hero--evoq .sdl-hero-copy { font-size: 48px; line-height: 1.2; font-weight: 500; }
+
+.sdl-hero--evoq .sdl-hero-copy .accent { color: #5636C7; }
+
+.sdl-hero--evoq .sdl-kicker-wrap { margin-bottom: 20px; }
+
+.sdl-hero--evoq .sdl-hero-sub { max-width: 500px; }
+
+.evoq-hero-visual {
+    position: relative; width: 100%; aspect-ratio: 1400/1127; display: flex; align-items: center; justify-content: center;
+  }
+
+.evoq-hero-image { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.evoq-narrative { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+
+.evoq-narrative-lead {
+    margin-top: 22px; font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 500;
+    font-size: clamp(23px, 2.3vw, 30px); line-height: 1.4; letter-spacing: -0.015em; color: #162833;
+  }
+
+.evoq-narrative-body { margin-top: 24px; }
+
+.evoq-narrative-body p {
+    margin: 0; padding: 20px 0; border-top: 1px solid #EEF1F6;
+    font-size: 16px; line-height: 1.72; color: #46535F;
+  }
+
+.evoq-narrative-body p:first-child { border-top: none; padding-top: 0; }
+
+.evoq-narrative-body p:last-child { padding-bottom: 0; }
+
+.evoq-platform-section--dark {
+    background: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.6px) 0 0/26px 26px, #101826;
+  }
+
+.evoq-platform-section--dark .evoq-narrative-lead { color: #FFFFFF; }
+
+.evoq-platform-section--dark .evoq-narrative-body p { color: rgba(255,255,255,0.6); border-top-color: rgba(255,255,255,0.1); }
+
+.evoq-arch { width: 100%; }
+
+.evoq-arch svg { display: block; width: 100%; height: auto; }
+
+.evoq-products-head { max-width: 720px; }
+
+.evoq-toolbar { margin-top: 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+
+.evoq-search { position: relative; flex: 1 1 280px; max-width: 360px; }
+
+.evoq-search svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #8891A0; pointer-events: none; }
+
+.evoq-search input {
+    width: 100%; font-family: inherit; font-size: 14.5px; color: #162833; background: #FFFFFF;
+    border: 1px solid #E4E9F2; border-radius: 999px; padding: 12px 18px 12px 42px; outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+.evoq-search input:focus { border-color: #6D4FEB; box-shadow: 0 0 0 3px rgba(109,79,235,0.14); }
+
+.evoq-filter-tabs { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+.evoq-filter-tab {
+    font-family: inherit; font-size: 13.5px; font-weight: 700; color: #46535F; background: #FFFFFF;
+    border: 1px solid #E4E9F2; border-radius: 999px; padding: 9px 18px; cursor: pointer; transition: all 0.15s ease;
+  }
+
+.evoq-filter-tab:hover { border-color: #6D4FEB; color: #5636C7; }
+
+.evoq-filter-tab.is-active { background: #5636C7; border-color: #5636C7; color: #FFFFFF; }
+
+.evoq-product-results { margin-top: 44px; }
+
+.evoq-product-row {
+    margin-top: 22px; display: flex; gap: 20px; overflow-x: auto; padding: 2px 2px 16px;
+    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+  }
+
+.evoq-product-row::-webkit-scrollbar { height: 6px; }
+
+.evoq-product-row::-webkit-scrollbar-track { background: transparent; }
+
+.evoq-product-row::-webkit-scrollbar-thumb { background: #E4E9F2; border-radius: 999px; }
+
+.evoq-product-card {
+    flex: 0 0 auto; width: min(300px, 76vw); scroll-snap-align: start; display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+    background: #FFFFFF; border: 1.5px solid #EEF1F6; border-radius: 20px; overflow: hidden;
+  }
+
+.evoq-product-card-image {
+    display: block; position: relative; aspect-ratio: 5 / 4; overflow: hidden; container-type: inline-size;
+    background: linear-gradient(160deg, var(--cat-soft, rgba(109,79,235,0.16)) 0%, #F7F9FC 120%);
+    background-size: cover; background-position: center;
+  }
+
+.evoq-product-card-image--photo .evoq-mk-panel:first-of-type { transform: scale(0.74); transform-origin: top left; }
+
+.evoq-product-card-image--photo .evoq-mk-panel:last-of-type { transform: scale(0.74); transform-origin: bottom right; }
+
+.evoq-product-card-image--photo::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(190deg, rgba(10,16,26,0.08) 0%, rgba(10,16,26,0.52) 100%);
+  }
+
+.evoq-mk-panel, .evoq-mk-title, .evoq-mk-label, .evoq-mk-strong, .evoq-mk-bar, .evoq-mk-chip, .evoq-mk-btn { display: block; }
+
+.evoq-mk-row, .evoq-mk-col { display: flex; }
+
+.evoq-mk-chip { display: inline-block; }
+
+.evoq-product-card-body { flex: 1; padding: 22px 24px 26px; transition: background-color 0.2s ease; }
+
+.evoq-product-card:hover .evoq-product-card-body { background: var(--cat-color, #5636C7); }
+
+.evoq-product-card-pill {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+    color: var(--cat-color, #5636C7); background: var(--cat-soft, rgba(109,79,235,0.14));
+    border-radius: 999px; padding: 5px 12px 5px 9px; transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+.evoq-product-card:hover .evoq-product-card-pill { background: rgba(255,255,255,0.92); color: var(--cat-color, #5636C7); }
+
+.evoq-product-card-pill svg { width: 12px; height: 12px; }
+
+.evoq-product-card-title {
+    margin-top: 16px; font-family: var(--font-manrope), 'Manrope', sans-serif; font-size: 21px; font-weight: 700;
+    line-height: 1.25; color: #162833; transition: color 0.2s ease;
+  }
+
+.evoq-product-card:hover .evoq-product-card-title { color: #FFFFFF; }
+
+.evoq-product-card-desc { margin-top: 9px; font-size: 14.5px; line-height: 1.6; color: #46535F; transition: color 0.2s ease; }
+
+.evoq-product-card:hover .evoq-product-card-desc { color: rgba(255,255,255,0.88); }
+
+.evoq-product-row-wrap { position: relative; }
+
+.evoq-product-row-arrow {
+    position: absolute; top: 42%; transform: translateY(-50%); z-index: 2; width: 44px; height: 44px;
+    border-radius: 50%; background: #FFFFFF; border: 1px solid #EEF1F6; box-shadow: 0 10px 24px rgba(16,24,40,0.14);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: #162833;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+
+.evoq-product-row-arrow:hover { box-shadow: 0 14px 30px rgba(16,24,40,0.2); transform: translateY(-50%) scale(1.05); }
+
+.evoq-product-row-arrow:active { transform: translateY(-50%) scale(0.96); }
+
+.evoq-product-row-arrow--prev { left: -8px; }
+
+.evoq-product-row-arrow--next { right: -8px; }
+
+.evoq-product-row-arrow svg { width: 18px; height: 18px; }
+
+.evoq-product-row-arrow[disabled] { opacity: 0; pointer-events: none; }
+
+@media (max-width: 700px) {
+  .evoq-product-row-arrow { display: none; }
+}
+
+.evoq-no-results { font-size: 15px; color: #8891A0; }
+
+.evoq-mk { position: absolute; inset: 0; }
+
+.evoq-mk-panel {
+    position: absolute; background: #FFFFFF; border-radius: 3cqw;
+    box-shadow: 0 2.4cqw 5cqw rgba(16,24,40,0.13); padding: 3.4cqw;
+  }
+
+.evoq-mk-head { display: flex; align-items: center; gap: 2cqw; margin-bottom: 2.6cqw; }
+
+.evoq-mk-title { font-size: 3.4cqw; font-weight: 700; color: #162833; font-family: var(--font-manrope), 'Manrope', sans-serif; white-space: nowrap; }
+
+.evoq-mk-label { font-size: 2.9cqw; color: #8891A0; white-space: nowrap; }
+
+.evoq-mk-strong { font-size: 5.2cqw; font-weight: 800; color: #162833; font-family: var(--font-manrope), 'Manrope', sans-serif; }
+
+.evoq-mk-row { display: flex; align-items: center; gap: 2cqw; }
+
+.evoq-mk-col { display: flex; flex-direction: column; gap: 2cqw; }
+
+.evoq-mk-bar { height: 1.9cqw; border-radius: 999px; background: #E7ECF4; }
+
+.evoq-mk-bar--dark { background: #D3DBE7; }
+
+.evoq-mk-bar--tint { background: var(--cat-soft, rgba(109,79,235,0.2)); }
+
+.evoq-mk-avatar { width: 6.4cqw; height: 6.4cqw; border-radius: 50%; background: var(--cat-soft, #E7ECF4); flex-shrink: 0; }
+
+.evoq-mk-sq { width: 6.4cqw; height: 6.4cqw; border-radius: 1.8cqw; background: var(--cat-soft, #E7ECF4); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+
+.evoq-mk-sq svg { width: 60%; height: 60%; color: var(--cat-color, #5636C7); }
+
+.evoq-mk-chip {
+    font-size: 2.7cqw; font-weight: 700; border-radius: 999px; padding: 1cqw 2.4cqw; white-space: nowrap;
+    background: var(--cat-soft, rgba(109,79,235,0.16)); color: var(--cat-color, #5636C7);
+  }
+
+.evoq-mk-chip--green { background: rgba(34,179,104,0.16); color: #1E8F53; }
+
+.evoq-mk-chip--grey { background: #EEF1F6; color: #8891A0; }
+
+.evoq-mk-line { border-top: 1px solid #EEF1F6; margin: 2.4cqw 0; }
+
+.evoq-mk-tile { border-radius: 2cqw; background: #F4F7FB; padding: 2cqw; display: flex; flex-direction: column; gap: 1.6cqw; }
+
+.evoq-mk-btn {
+    font-size: 2.8cqw; font-weight: 700; color: #FFFFFF; background: var(--cat-color, #5636C7);
+    border-radius: 999px; padding: 1.4cqw 3.4cqw; display: inline-block; white-space: nowrap;
+  }
+
+.evoq-mk-check {
+    width: 5.4cqw; height: 5.4cqw; border-radius: 50%; background: #22B368; color: #FFFFFF; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+.evoq-mk-check svg { width: 58%; height: 58%; }
+
+.evoq-industries-head { max-width: 640px; }
+
+.evoq-industries-row {
+    margin-top: 32px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+
+.evoq-industry-card { display: block; }
+
+.evoq-industry-photo {
+    position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: #EEF1F6;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+.evoq-industry-card:hover .evoq-industry-photo { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(16,24,40,0.18); }
+
+.evoq-industry-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.evoq-industry-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(10,16,26,0.72) 0%, rgba(10,16,26,0) 55%);
+  }
+
+.evoq-industry-label {
+    position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 1;
+    font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 700; font-size: 13.5px; line-height: 1.3; color: #FFFFFF;
+  }
+
+@media (max-width: 1080px) {
+  .evoq-industries-row { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .evoq-industries-row { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .evoq-industry-label { font-size: 12.5px; }
+}
+
+@media (max-width: 480px) {
+  .evoq-industries-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+.evoq-integrations-layout { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; align-items: center; }
+
+.evoq-integrations-head { max-width: 480px; }
+
+.evoq-integrations-body { margin-top: 22px; max-width: 480px; }
+
+.evoq-integrations-body p { margin: 10px 0 0; font-size: 16px; line-height: 1.7; color: #46535F; }
+
+.evoq-integrations-body p:first-child { margin-top: 0; }
+
+.evoq-integrations-visual {
+    position: relative; container-type: inline-size; overflow: hidden;
+    aspect-ratio: 4 / 3.2; border-radius: 24px; border: 1px solid #EEF1F6;
+    background: linear-gradient(180deg, #FBFCFE 0%, #F1F4FA 100%);
+  }
+
+.evoq-integrations-rings {
+    position: absolute; left: 50%; top: 8%; width: 150%; aspect-ratio: 1/1; transform: translateX(-50%);
+    border-radius: 50%; pointer-events: none;
+    background: repeating-radial-gradient(circle at 50% 0%, rgba(120,140,170,0.14) 0, rgba(120,140,170,0.14) 1.5px, transparent 1.5px, transparent 58px);
+  }
+
+.evoq-integration-badge {
+    position: absolute; transform: translate(-50%, -50%); z-index: 2;
+    width: clamp(30px, 11cqw, 54px); aspect-ratio: 1/1; border-radius: 50%;
+    background: #FFFFFF; box-shadow: 0 12px 24px rgba(16,24,40,0.12);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+.evoq-integration-badge--lg { width: clamp(38px, 14cqw, 68px); }
+
+.evoq-integration-badge img { width: 56%; height: 56%; object-fit: contain; }
+
+.evoq-integrations-caption {
+    position: absolute; left: 5%; right: 5%; bottom: 6%; z-index: 3;
+  }
+
+.evoq-integrations-caption-title {
+    font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 700; color: #162833;
+    font-size: clamp(11px, 3.6cqw, 16px);
+  }
+
+.evoq-integrations-caption-desc {
+    margin-top: clamp(2px, 1.4cqw, 6px); color: #46535F; line-height: 1.55; max-width: 78%;
+    font-size: clamp(8.5px, 2.4cqw, 12.5px);
+  }
+
+@media (max-width: 1100px) {
+  .evoq-integrations-layout { grid-template-columns: 1fr; gap: 32px; }
+  .evoq-integrations-head, .evoq-integrations-body { max-width: 720px; }
+  .evoq-integrations-visual { max-width: 640px; margin: 0 auto; }
+}
+
+.evoq-integrations-cta { margin-top: 36px; }
+
+.evoq-cta-section { padding: 72px 48px 72px; }
+
+.evoq-cta-card {
+    position: relative; overflow: hidden; max-width: 1360px; margin: 0 auto;
+    background: #101826; border: 1px solid rgba(255,255,255,0.08); border-radius: 28px;
+    padding: 78px 56px 82px; text-align: center;
+  }
+
+.evoq-cta-card::before {
+    content: ''; position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
+    width: 620px; height: 400px; pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(109,79,235,0.30), rgba(109,79,235,0) 68%);
+  }
+
+.evoq-cta-inner { position: relative; }
+
+.evoq-cta-title {
+    margin-top: 20px; font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 500;
+    font-size: clamp(28px, 3.3vw, 42px); line-height: 1.2; letter-spacing: -0.015em; color: #FFFFFF;
+  }
+
+.evoq-cta-sub { margin: 18px auto 0; max-width: 520px; font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.62); }
+
+.evoq-cta-btn {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; background: #6D4FEB;
+    color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px 32px; border-radius: 999px;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+.evoq-cta-btn:hover { background: #5636C7; color: #FFFFFF; transform: translateY(-1px); }
+
+.evoq-cta-btn .arrow { display: inline-block; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+.evoq-cta-btn:hover .arrow { transform: translateX(4px); }
+
+@media (max-width: 1060px) {
+  .evoq-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+  .evoq-cta-section { padding: 56px 24px 56px; }
+  .evoq-cta-card { padding: 56px 28px 60px; }
+  .evoq-narrative { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 560px) {
+  .evoq-toolbar { flex-direction: column; align-items: stretch; }
+  .evoq-search { flex: none; max-width: none; width: 100%; }
+}
+
+.evoq-hero-visual {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+.evoq-hero-visual { animation-delay: 0.15s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .evoq-hero-visual {
+        animation: none !important; opacity: 1 !important; transform: none !important;
+      }
+}

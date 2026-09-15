@@ -1,0 +1,76 @@
+/* investment-ladder — section styles, verbatim from the design.
+
+   Extracted from D:\sdl\sdl\Payload-cms\sdl-2.0 by tools/visual-parity/split-css.mjs.
+   DO NOT reformat, reorder, normalise the breakpoints, or convert values to a scale —
+   every one of those is a visual change. See web/styles/README.md. */
+
+.sdl-invest-card {
+    position: relative; border-radius: 28px; overflow: hidden;
+    background: #101826; padding: 56px;
+  }
+
+.sdl-invest-title { font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 700; font-size: clamp(28px, 3vw, 38px); line-height: 1.25; color: #FFFFFF; }
+
+.sdl-invest-sub { margin-top: 20px; max-width: 900px; font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.68); }
+
+.sdl-invest-steps {
+    margin-top: 48px; display: flex; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden;
+  }
+
+.sdl-invest-step {
+    flex: 1; min-width: 0; padding: 26px 22px; display: flex; flex-direction: column; justify-content: space-between;
+    border-right: 1px solid rgba(255,255,255,0.1); min-height: 210px;
+    background: transparent; transition: background 0.2s ease;
+  }
+
+.sdl-invest-step:last-child { border-right: none; }
+
+.sdl-invest-step-top { display: flex; align-items: center; justify-content: space-between; }
+
+.sdl-invest-step-num {
+    font-family: var(--font-manrope), 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: var(--success);
+    letter-spacing: 0.02em; transition: color 0.2s ease;
+  }
+
+.sdl-invest-step-arrow { color: var(--success); font-size: 15px; line-height: 1; transition: color 0.2s ease; }
+
+.sdl-invest-step-tick { width: 28px; height: 2px; background: var(--success); transition: background 0.2s ease; }
+
+.sdl-invest-step-title { margin-top: 14px; font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 700; font-size: 18px; color: #FFFFFF; }
+
+.sdl-invest-step-caption { margin-top: 4px; font-size: 13px; color: rgba(255,255,255,0.55); }
+
+.sdl-invest-step:hover { background: var(--accent); }
+
+.sdl-invest-step:hover .sdl-invest-step-num,
+  .sdl-invest-step:hover .sdl-invest-step-arrow { color: rgba(255,255,255,0.75); }
+
+.sdl-invest-step:hover .sdl-invest-step-tick { background: var(--attention); }
+
+.sdl-invest-divider { margin-top: 44px; height: 1px; background: rgba(255,255,255,0.12); }
+
+.sdl-invest-closing { margin-top: 32px; }
+
+.sdl-invest-closing div {
+    font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 700; font-size: clamp(24px, 3vw, 34px); line-height: 1.3;
+  }
+
+.sdl-invest-closing .line1 { color: #FFFFFF; }
+
+.sdl-invest-closing .line2 { color: var(--success); }
+
+@media (max-width: 1060px) {
+  .sdl-invest-card { padding: 36px 28px; }
+}
+
+@media (max-width: 1060px) {
+  .sdl-invest-steps { flex-wrap: wrap; }
+}
+
+@media (max-width: 1060px) {
+  .sdl-invest-step { flex: 1 1 50%; border-bottom: 1px solid rgba(255,255,255,0.1); min-height: 170px; }
+}
+
+@media (max-width: 560px) {
+  .sdl-invest-step { flex: 1 1 100%; }
+}

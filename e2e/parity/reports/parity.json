@@ -1,0 +1,2232 @@
+{
+  "at": "2026-09-11T11:44:31.579Z",
+  "designComparison": true,
+  "results": [
+    {
+      "page": "home",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "209.141px",
+          "actual": "210.266px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "151.625px",
+          "actual": "152.766px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "1073.14px",
+          "actual": "526.797px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "209.141px",
+          "actual": "210.266px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "151.625px",
+          "actual": "152.766px"
+        },
+        {
+          "selector": "@768 .sdl-contact-section",
+          "property": "height",
+          "expected": "1268.48px",
+          "actual": "1278.34px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "1511.11px",
+          "actual": "720.844px"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.10577390584065341,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.10225950267916946,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.08645640346753677,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.0756520549610895,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.1987028683618254,
+          "ok": false
+        }
+      ],
+      "layer3": [
+        "section count: design 8, target 9"
+      ],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "services",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-section",
+          "property": "height",
+          "expected": "719.594px",
+          "actual": "720.594px"
+        },
+        {
+          "selector": "@1440 .sdl-kicker",
+          "property": "width",
+          "expected": "146.969px",
+          "actual": "456.391px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "209.141px",
+          "actual": "210.266px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "146.906px",
+          "actual": "163.531px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-contact-section",
+          "property": "height",
+          "expected": "845px",
+          "actual": "794.5px"
+        },
+        {
+          "selector": "@1440 .sdl-form",
+          "property": "height",
+          "expected": "559px",
+          "actual": "468px"
+        },
+        {
+          "selector": "@1440 .sdl-section--white",
+          "property": "height",
+          "expected": "719.594px",
+          "actual": "720.594px"
+        },
+        {
+          "selector": "@1440 .sdl-section--tight",
+          "property": "height",
+          "expected": "719.594px",
+          "actual": "720.594px"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "722.391px",
+          "actual": "723.391px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "695.156px",
+          "actual": "758.344px"
+        },
+        {
+          "selector": "@768 .sdl-kicker",
+          "property": "width",
+          "expected": "146.969px",
+          "actual": "720px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "1019.17px",
+          "actual": "942.172px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "209.141px",
+          "actual": "210.266px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "146.906px",
+          "actual": "163.531px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-contact-section",
+          "property": "height",
+          "expected": "1412.02px",
+          "actual": "1330.88px"
+        },
+        {
+          "selector": "@768 .sdl-form",
+          "property": "height",
+          "expected": "777px",
+          "actual": "686px"
+        },
+        {
+          "selector": "@768 .svc-timeline-section",
+          "property": "height",
+          "expected": "847.156px",
+          "actual": "910.344px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "722.391px",
+          "actual": "723.391px"
+        },
+        {
+          "selector": "@768 .sdl-section--tight",
+          "property": "height",
+          "expected": "722.391px",
+          "actual": "723.391px"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.0664302041459762,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.06149859098228663,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.14236530270590378,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.0827397917417688,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.14309690906375988,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "ai-transformation",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "229.359px",
+          "actual": "230.5px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "192.875px",
+          "actual": "194px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "1439.55px",
+          "actual": "1431.55px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@1440 .ai-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .ai-value-section",
+          "property": "height",
+          "expected": "796.375px",
+          "actual": "776.375px"
+        },
+        {
+          "selector": "@1440 .ai-cta-section",
+          "property": "height",
+          "expected": "559.484px",
+          "actual": "551.484px"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "585.625px",
+          "actual": "577.625px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "433.625px",
+          "actual": "425.625px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "915.906px",
+          "actual": "907.906px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "229.359px",
+          "actual": "230.5px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "192.875px",
+          "actual": "194px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-hero--ai",
+          "property": "height",
+          "expected": "915.906px",
+          "actual": "907.906px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "585.625px",
+          "actual": "577.625px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "2162.72px",
+          "actual": "2154.72px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@768 .ai-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .ai-value-section",
+          "property": "height",
+          "expected": "1001.75px",
+          "actual": "975.75px"
+        },
+        {
+          "selector": "@768 .ai-cta-section",
+          "property": "height",
+          "expected": "466.688px",
+          "actual": "458.688px"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.051520326212949163,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.06271300435837526,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.0742967280257107,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.08200366501661589,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.10218871916947696,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": [
+        "1 console error(s): Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>\n      <LoadingBoundary name=\"services/a...\" loading={null}>\n        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>\n          <RedirectBoundary>\n            <RedirectErrorBoundary router={{...}}>\n              <InnerLayoutRouter url=\"/services/...\" tree={[...]} params={{slug:[...]}} cacheNode={{rsc:{...}, ...}} ...>\n                <SegmentViewNode type=\"page\" pagePath=\"[[...slug]...\">\n                  <SegmentTrieNode>\n                  <Page>\n                    <header>\n                    <main id=\"main\" className=\"sdl-page\">\n                      <section>\n                      <section>\n                      <section>\n                      <section>\n                      <section className=\"sdl-sectio...\">\n                        <CaseStudy>\n                          <div className=\"sdl-sectio...\">\n                            <div>\n                            <div className=\"ai-case\">\n                              <div className=\"ai-case-media\">\n                                <div\n                                  className=\"ai-case-mock\"\n                                  role=\"img\"\n                                  aria-label=\"Intelligent support operations for a growing SaaS platform\"\n                                  dangerouslySetInnerHTML={{\n+                                   __html: \"<div class=\\\"ai-mock-bar\\\"><span></span><span></span><span></span><div cl...\"\n-                                   __html: \"<div class=\\\"ai-mock-bar\\\"><span></span><span></span><span></span><div cl...\"\n                                  }}\n                                >\n+                               <span className=\"ai-case-tag\">\n-                               <div>\n                              ...\n                      ...\n                    ...\n                ...\n              ...\n"
+      ]
+    },
+    {
+      "page": "digital-engineering",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "306.875px",
+          "actual": "308.016px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "270.391px",
+          "actual": "271.516px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "1354.97px",
+          "actual": "1346.97px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@1440 .de-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .de-value-section",
+          "property": "height",
+          "expected": "745.484px",
+          "actual": "737.484px"
+        },
+        {
+          "selector": "@1440 .de-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "553.438px",
+          "actual": "545.438px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "401.438px",
+          "actual": "393.438px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "947.25px",
+          "actual": "939.25px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "306.875px",
+          "actual": "308.016px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "270.391px",
+          "actual": "271.516px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-hero--de",
+          "property": "height",
+          "expected": "947.25px",
+          "actual": "939.25px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "553.438px",
+          "actual": "545.438px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "1714.97px",
+          "actual": "1706.97px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@768 .de-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .de-value-section",
+          "property": "height",
+          "expected": "868.844px",
+          "actual": "860.844px"
+        },
+        {
+          "selector": "@768 .de-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.03718513576328781,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.04931054494421692,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.03896933828774345,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.06908774205188768,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.11094495991352131,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "business-transformation",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "319.656px",
+          "actual": "320.797px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "293.125px",
+          "actual": "294.266px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "line-height",
+          "expected": "28px",
+          "actual": "normal"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "228.641px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "28px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "1022.8px",
+          "actual": "1014.8px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@1440 .bt-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .bt-value-section",
+          "property": "height",
+          "expected": "676.109px",
+          "actual": "668.109px"
+        },
+        {
+          "selector": "@1440 .bt-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "585.625px",
+          "actual": "577.625px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "433.625px",
+          "actual": "425.625px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "963.906px",
+          "actual": "955.906px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "319.656px",
+          "actual": "320.797px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "293.125px",
+          "actual": "294.266px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "line-height",
+          "expected": "28px",
+          "actual": "normal"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "228.641px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "28px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-hero--bt",
+          "property": "height",
+          "expected": "963.906px",
+          "actual": "955.906px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "585.625px",
+          "actual": "577.625px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "1066.59px",
+          "actual": "1058.59px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@768 .bt-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .bt-value-section",
+          "property": "height",
+          "expected": "843.531px",
+          "actual": "835.531px"
+        },
+        {
+          "selector": "@768 .bt-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.11363899193917743,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.13042750871513945,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.1310150896289487,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.1424046073518856,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.17590677244408587,
+          "ok": false
+        }
+      ],
+      "layer3": [
+        "section count: design 7, target 6"
+      ],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "digital-experience",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "209.141px",
+          "actual": "210.266px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "263.906px",
+          "actual": "265.031px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "869.594px",
+          "actual": "861.594px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@1440 .dx-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .dx-value-section",
+          "property": "height",
+          "expected": "681.188px",
+          "actual": "673.188px"
+        },
+        {
+          "selector": "@1440 .dx-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "553.438px",
+          "actual": "545.438px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "401.438px",
+          "actual": "393.438px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "947.25px",
+          "actual": "939.25px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "209.141px",
+          "actual": "210.266px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "263.906px",
+          "actual": "265.031px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-hero--dx",
+          "property": "height",
+          "expected": "947.25px",
+          "actual": "939.25px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "553.438px",
+          "actual": "545.438px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "1151.59px",
+          "actual": "1143.59px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@768 .dx-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .dx-value-section",
+          "property": "height",
+          "expected": "915.531px",
+          "actual": "907.531px"
+        },
+        {
+          "selector": "@768 .dx-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.02745359470129376,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.029520193202979515,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.05150155490233065,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.060216192237480246,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.08358308538454602,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "growth-transformation",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "258.25px",
+          "actual": "259.391px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "231.734px",
+          "actual": "232.859px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "1104.02px",
+          "actual": "1096.02px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@1440 .gt-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .gt-value-section",
+          "property": "height",
+          "expected": "932px",
+          "actual": "924px"
+        },
+        {
+          "selector": "@1440 .gt-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "582.312px",
+          "actual": "574.312px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "430.312px",
+          "actual": "422.312px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "947.25px",
+          "actual": "939.25px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "258.25px",
+          "actual": "259.391px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "231.734px",
+          "actual": "232.859px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-hero--gt",
+          "property": "height",
+          "expected": "947.25px",
+          "actual": "939.25px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "582.312px",
+          "actual": "574.312px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "1542.69px",
+          "actual": "1534.69px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "position",
+          "expected": "relative",
+          "actual": "static"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "top",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "right",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "bottom",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "left",
+          "expected": "0px",
+          "actual": "auto"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "overflow",
+          "expected": "hidden",
+          "actual": "visible"
+        },
+        {
+          "selector": "@768 .gt-cap-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .gt-value-section",
+          "property": "height",
+          "expected": "1511.12px",
+          "actual": "1503.12px"
+        },
+        {
+          "selector": "@768 .gt-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.03792970925997343,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.04034052625464684,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.06802733465300419,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.06951342019204008,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.08641014858424446,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "web-application-engineering",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-section",
+          "property": "height",
+          "expected": "650px",
+          "actual": "604px"
+        },
+        {
+          "selector": "@1440 .sdl-section-inner",
+          "property": "height",
+          "expected": "446px",
+          "actual": "400px"
+        },
+        {
+          "selector": "@1440 .sdl-section-sub",
+          "property": "height",
+          "expected": "86.3906px",
+          "actual": "57.5938px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "333.703px",
+          "actual": "334.844px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--white",
+          "property": "height",
+          "expected": "650px",
+          "actual": "604px"
+        },
+        {
+          "selector": "@1440 .wae-ai-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .wae-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "772.766px",
+          "actual": "672.766px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "620.766px",
+          "actual": "520.766px"
+        },
+        {
+          "selector": "@768 .sdl-section-sub",
+          "property": "height",
+          "expected": "86.3906px",
+          "actual": "57.5938px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "934.625px",
+          "actual": "926.625px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "333.703px",
+          "actual": "334.844px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "117.938px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "772.766px",
+          "actual": "672.766px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "872.469px",
+          "actual": "768.469px"
+        },
+        {
+          "selector": "@768 .wae-ai-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .wae-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.11430032420878687,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.12691193226465503,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.16440600494546276,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.16768070523575976,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.20727835325365207,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "cloud-engineering",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-section",
+          "property": "height",
+          "expected": "642.531px",
+          "actual": "588.531px"
+        },
+        {
+          "selector": "@1440 .sdl-section-inner",
+          "property": "height",
+          "expected": "438.531px",
+          "actual": "384.531px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "344.312px",
+          "actual": "345.453px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--white",
+          "property": "height",
+          "expected": "642.531px",
+          "actual": "588.531px"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "772.391px",
+          "actual": "672.391px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "620.391px",
+          "actual": "520.391px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "882.047px",
+          "actual": "912.438px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "344.312px",
+          "actual": "345.453px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "772.391px",
+          "actual": "672.391px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "828.094px",
+          "actual": "724.094px"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.09710871600494474,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.11209699316170556,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.1938225963128307,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.21574245561642028,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.19985578720852296,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "mobile-engineering",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-section",
+          "property": "height",
+          "expected": "650px",
+          "actual": "604px"
+        },
+        {
+          "selector": "@1440 .sdl-section-inner",
+          "property": "height",
+          "expected": "446px",
+          "actual": "400px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "353.406px",
+          "actual": "354.547px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--white",
+          "property": "height",
+          "expected": "650px",
+          "actual": "604px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "830.656px",
+          "actual": "745.531px"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "801.266px",
+          "actual": "701.266px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "649.266px",
+          "actual": "549.266px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "901.094px",
+          "actual": "976.438px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "353.406px",
+          "actual": "354.547px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "801.266px",
+          "actual": "701.266px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "777.25px",
+          "actual": "695.719px"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.11370416216113673,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.11293344752673797,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.11415738117388363,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.12469559403153153,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.16120274395718853,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "quality-engineering",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-section",
+          "property": "height",
+          "expected": "615.5px",
+          "actual": "569.5px"
+        },
+        {
+          "selector": "@1440 .sdl-section-inner",
+          "property": "height",
+          "expected": "411.5px",
+          "actual": "365.5px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "354.562px",
+          "actual": "355.703px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@1440 .sdl-section--white",
+          "property": "height",
+          "expected": "615.5px",
+          "actual": "569.5px"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "772.766px",
+          "actual": "672.766px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "620.766px",
+          "actual": "520.766px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "911.734px",
+          "actual": "942.125px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "354.562px",
+          "actual": "355.703px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "172.641px",
+          "actual": "173.781px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "width",
+          "expected": "148.578px",
+          "actual": "134.578px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "height",
+          "expected": "20px",
+          "actual": "21px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "772.766px",
+          "actual": "672.766px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "799.719px",
+          "actual": "695.719px"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.07886493780481123,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.0805919660135462,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.09244147883760287,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.10730477992053926,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.1470461233729485,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    },
+    {
+      "page": "evoq",
+      "layer1": [
+        {
+          "selector": "@1440 .sdl-cta",
+          "property": "width",
+          "expected": "125.734px",
+          "actual": "126.734px"
+        },
+        {
+          "selector": "@1440 .sdl-section",
+          "property": "height",
+          "expected": "794.5px",
+          "actual": "457.125px"
+        },
+        {
+          "selector": "@1440 .sdl-section-inner",
+          "property": "height",
+          "expected": "590.5px",
+          "actual": "253.125px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-primary",
+          "property": "width",
+          "expected": "212.656px",
+          "actual": "213.797px"
+        },
+        {
+          "selector": "@1440 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "149.141px",
+          "actual": "150.266px"
+        },
+        {
+          "selector": "@1440 .sdl-cta-link",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@1440 .sdl-section--white",
+          "property": "height",
+          "expected": "794.5px",
+          "actual": "457.125px"
+        },
+        {
+          "selector": "@1440 .sdl-section--alt",
+          "property": "height",
+          "expected": "1065.91px",
+          "actual": "1057.91px"
+        },
+        {
+          "selector": "@1440 .evoq-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-section",
+          "property": "height",
+          "expected": "1113.97px",
+          "actual": "532.625px"
+        },
+        {
+          "selector": "@768 .sdl-section-inner",
+          "property": "height",
+          "expected": "961.969px",
+          "actual": "380.625px"
+        },
+        {
+          "selector": "@768 .sdl-hero",
+          "property": "height",
+          "expected": "915.906px",
+          "actual": "907.906px"
+        },
+        {
+          "selector": "@768 .sdl-hero-primary",
+          "property": "width",
+          "expected": "212.656px",
+          "actual": "213.797px"
+        },
+        {
+          "selector": "@768 .sdl-hero-secondary",
+          "property": "width",
+          "expected": "149.141px",
+          "actual": "150.266px"
+        },
+        {
+          "selector": "@768 .sdl-cta-link",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        },
+        {
+          "selector": "@768 .sdl-hero--evoq",
+          "property": "height",
+          "expected": "915.906px",
+          "actual": "907.906px"
+        },
+        {
+          "selector": "@768 .sdl-section--white",
+          "property": "height",
+          "expected": "1113.97px",
+          "actual": "532.625px"
+        },
+        {
+          "selector": "@768 .sdl-section--alt",
+          "property": "height",
+          "expected": "1001.7px",
+          "actual": "993.703px"
+        },
+        {
+          "selector": "@768 .evoq-cta-section",
+          "property": "(element)",
+          "expected": "present",
+          "actual": "missing"
+        }
+      ],
+      "layer2": [
+        {
+          "viewport": 1440,
+          "ratio": 0.17500723860920134,
+          "ok": false
+        },
+        {
+          "viewport": 1280,
+          "ratio": 0.17113610004707672,
+          "ok": false
+        },
+        {
+          "viewport": 1024,
+          "ratio": 0.2507277541822527,
+          "ok": false
+        },
+        {
+          "viewport": 768,
+          "ratio": 0.25052623056994816,
+          "ok": false
+        },
+        {
+          "viewport": 375,
+          "ratio": 0.2084914322872006,
+          "ok": false
+        }
+      ],
+      "layer3": [],
+      "layer4": [],
+      "selfCheck": []
+    }
+  ]
+}

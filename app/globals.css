@@ -1,0 +1,173 @@
+/* The single ordered import chain for the whole site.
+ *
+ * Cascade order is load-bearing: the design relies on later rules overriding earlier ones at
+ * equal specificity. Importing a section stylesheet from its component instead would make
+ * ordering depend on module resolution, which is not stable, and specificity conflicts would
+ * then appear only in production builds.
+ *
+ * Order:
+ *   1. tokens    — :root custom properties
+ *   2. base      — box-sizing, body ground, link defaults
+ *   3. chrome    — header, nav, footer, section shells, kickers, CTA links, reveal system
+ *   4. sections  — one file per page-builder block, in the design's own source order
+ *   5. variants  — page-template overrides; MUST come last (see web/styles/variants.css)
+ *
+ * See web/styles/README.md before editing anything these files contain.
+ */
+
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/chrome.css';
+
+/* Sections — home page order first, then service-detail, then EVOQ. */
+@import '../styles/sections/hero.css';
+@import '../styles/sections/approach-steps.css';
+@import '../styles/sections/capability-cards.css';
+@import '../styles/sections/investment-ladder.css';
+@import '../styles/sections/split-feature.css';
+@import '../styles/sections/proof.css';
+@import '../styles/sections/testimonials.css';
+@import '../styles/sections/insights-carousel.css';
+@import '../styles/sections/contact-form.css';
+@import '../styles/sections/process-timeline.css';
+
+@import '../styles/sections/narrative.css';
+@import '../styles/sections/capability-detail.css';
+@import '../styles/sections/value-grid.css';
+@import '../styles/sections/case-study.css';
+@import '../styles/sections/tech-groups.css';
+@import '../styles/sections/ai-engineering.css';
+@import '../styles/sections/cta-banner.css';
+
+@import '../styles/sections/evoq-architecture.css';
+@import '../styles/sections/product-grid.css';
+@import '../styles/sections/industries-grid.css';
+
+/* Page-owned rules — each design page's own prefixed stylesheet, lifted verbatim by
+   tools/visual-parity/lift-page-css.mjs. Prefixes never collide, so their order is free. */
+@import '../styles/pages/ai.css';
+@import '../styles/pages/bt.css';
+@import '../styles/pages/de.css';
+@import '../styles/pages/dx.css';
+@import '../styles/pages/gt.css';
+@import '../styles/pages/wae.css';
+@import '../styles/pages/ce.css';
+@import '../styles/pages/me.css';
+@import '../styles/pages/qe.css';
+@import '../styles/pages/evoq.css';
+@import '../styles/pages/zh.css';
+@import '../styles/pages/sf.css';
+
+/* Collection-detail route (not a page-builder block). Fully scoped under .sdl-article. */
+@import '../styles/sections/article.css';
+
+@import '../styles/variants.css';
+
+/* ── Accessibility additions (sanctioned deviation #3) ──────────────────────
+ *
+ * Additive only. These add rules; they never alter a declaration lifted from the design.
+ * See plan §6.11.
+ */
+
+/* Skip link — visually hidden until focused. */
+.sdl-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 0 0 8px 0;
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.16);
+}
+.sdl-skip-link:focus {
+  left: 0;
+}
+
+/* The design defines no focus ring anywhere. Keyboard users currently get only the browser
+   default, which is invisible against several of these backgrounds. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.sdl-contact-section :focus-visible,
+.sdl-footer :focus-visible {
+  outline-color: #ffffff;
+}
+
+/* Screen-reader-only text, for status messages that must not be visible. */
+.sdl-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* A section whose `reveal` setting is off: its elements are simply shown, with no scroll-in. */
+.sdl-reveal-off .reveal,
+.sdl-reveal-off .reveal-group > * {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* ── Application chrome (not part of the design) ────────────────────────────
+ *
+ * Loading skeletons and the preview banner have no counterpart in the supplied HTML — they are
+ * states the static design never had to express. Kept here, out of the extracted stylesheets,
+ * so re-running the extraction cannot clobber them and so the parity harness sees a clean
+ * separation between "the design" and "things the app adds".
+ */
+
+.sdl-skeleton {
+  background: linear-gradient(90deg, #eef1f6 25%, #f6f8fc 37%, #eef1f6 63%);
+  background-size: 400% 100%;
+  border-radius: 8px;
+  animation: sdlSkeletonSheen 1.4s ease-in-out infinite;
+}
+
+@keyframes sdlSkeletonSheen {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}
+
+.sdl-preview-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #162833;
+  color: #ffffff;
+  font-size: 13px;
+  box-shadow: 0 12px 32px rgba(16, 24, 40, 0.28);
+}
+
+.sdl-preview-banner a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sdl-skeleton {
+    animation: none;
+  }
+}

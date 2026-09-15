@@ -1,0 +1,39 @@
+/* "AI-enabled engineering" — shared across digital-engineering and its four sub-service pages
+ * (web-application-, cloud-, mobile-, quality-engineering).
+ *
+ * Canonicalised under the `.de-ai-*` prefix (digital-engineering.html's own, and the first of the
+ * five to ship it) — the same "one component, one prefix" treatment already used for
+ * `.ai-cta-card` / `.ai-case-mock` across the other service pages (their per-page rules are
+ * byte-identical; verified before applying the same treatment here). `lib/registries/
+ * ai-engineering-mocks.ts` normalises every page's stage markup to this prefix.
+ *
+ * The core (grid, kicker--ai, glow, window, particles, badge, prompt/diff/checks/review stages)
+ * is ported verbatim from digital-engineering.html. The additional stage types below it
+ * (metrics / suggest / feed / code / risk / defects) are ported from web-application-,
+ * mobile- and quality-engineering.html, which introduce them — same visual language, confirmed
+ * consistent across the pages that share a stage type (e.g. `-metrics` on wae/ce/qe).
+ */
+
+/* stage: prompt (terminal-style input line) */
+
+/* stage: AI-generated diff */
+
+/* stage: automated validation checklist */
+
+/* stage: human review + merge (digital-engineering only) */
+
+/* stage: metrics (web-application-, cloud-, quality-engineering) */
+
+/* stage: risk analysis (quality-engineering) */
+
+/* stage: defect detection (quality-engineering) */
+
+/* stage: smart suggestion (mobile-engineering) */
+
+/* stage: personalised feed (mobile-engineering) */
+
+/* stage: mobile code diff (mobile-engineering) */
+
+/* ── digital-engineering's own capability-row "cross-cutting capabilities" pill row ─────────
+ * Verbatim from digital-engineering.html — sits under `.de-cap-rows` in the capability-detail
+ * block's `row` variant. */

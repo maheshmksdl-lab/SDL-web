@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+# pnpm is the package manager (see packageManager in package.json). npm/yarn lockfiles are
+# artifacts of a mismatched toolchain and must not be committed.
+package-lock.json
+yarn.lock
+
+# Next.js — 16 splits dev and build output; .next/dev is the dev tree
+.next/
+.next/dev/
+out/
+.turbo/
+.next-profiles/
+.next-docs/
+
+# Production
+build/
+dist/
+
+# Environment — .env.example is committed, real env files never are
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# Payload generated artifacts
+cms/src/payload-types.ts
+web/lib/payload-types.ts
+**/importMap.js
+
+# Uploaded media — never commit; production uses object storage
+cms/media/*
+!cms/media/.gitkeep
+
+# Test output
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+tools/visual-parity/reports/*
+!tools/visual-parity/reports/.gitkeep
+web/e2e/parity/reports/*
+!web/e2e/parity/reports/.gitkeep
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Database dumps
+*.dump
+*.sql.gz

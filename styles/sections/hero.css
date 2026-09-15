@@ -1,0 +1,157 @@
+/* hero — section styles, verbatim from the design.
+
+   Extracted from D:\sdl\sdl\Payload-cms\sdl-2.0 by tools/visual-parity/split-css.mjs.
+   DO NOT reformat, reorder, normalise the breakpoints, or convert values to a scale —
+   every one of those is a visual change. See web/styles/README.md. */
+
+.sdl-hero {
+    max-width: 1360px; margin: 0 auto; padding: 84px 48px 56px;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;
+  }
+
+.sdl-hero-copy-wrap { max-width: 640px; }
+
+.sdl-hero-copy {
+    font-family: var(--font-manrope), 'Manrope', sans-serif;
+    font-size: clamp(40px, 4.6vw, 58px); line-height: 1.18; font-weight: 500;
+    letter-spacing: -0.01em; color: #162833;
+    /* The design applies this class to a <div>; ours is an <h1> (the hero heading is the page's
+       document title), so its default margin needs suppressing to match. */
+    margin: 0;
+  }
+
+.sdl-hero-copy .accent { color: var(--accent); }
+
+.sdl-hero-sub { margin-top: 28px; font-size: 19px; line-height: 1.65; color: #46535F; max-width: 460px; }
+
+.sdl-hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 44px; flex-wrap: wrap; }
+
+.sdl-hero-primary {
+    display: inline-flex; align-items: center; gap: 10px; background: var(--accent);
+    color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px 30px; border-radius: 999px;
+  }
+
+.sdl-hero-primary:hover { background: var(--accent-hover); color: #FFFFFF; }
+
+.sdl-hero-secondary { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 700; font-size: 16px; }
+
+.sdl-hero-visual { width: 100%; aspect-ratio: 520/480; display: flex; align-items: center; }
+
+.sdl-hero-visual canvas { width: 100%; height: 100%; display: block; }
+
+@media (max-width: 1060px) {
+  .sdl-hero { grid-template-columns: 1fr !important; padding: 56px 24px 64px !important; }
+}
+
+@media (max-width: 1060px) {
+  .sdl-hero-copy { font-size: 38px !important; }
+}
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap, .sdl-hero-visual {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+.sdl-hero-visual { animation-delay: 0.15s; }
+
+.svc-hero-visual { position: relative; width: 100%; aspect-ratio: 560/520; }
+
+.svc-hero-visual svg { display: block; width: 100%; height: 100%; }
+
+.sdl-hero-trust {
+    margin-top: 36px; padding-top: 24px; border-top: 1px solid #E4E9F2;
+    display: flex; align-items: center; gap: 10px; font-size: 13px; color: #8891A0;
+  }
+
+.sdl-hero-trust strong { color: #162833; font-weight: 700; }
+
+.sdl-hero-trust .dot { width: 4px; height: 4px; border-radius: 50%; background: #C7D0DC; flex-shrink: 0; }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual, .svc-hero-visual { max-width: 460px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap, .svc-hero-visual {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+.svc-hero-visual { animation-delay: 0.15s; }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+@media (max-width: 1060px) {
+  .sdl-hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+}
+
+.sdl-hero-copy-wrap {
+    opacity: 0; transform: translateY(18px);
+    animation: sdlRevealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+/* ── The three new engineering-family hero visuals ──────────────────────────
+ *
+ * Ported from cloud-engineering.html / mobile-engineering.html / quality-engineering.html
+ * (added to the design after the original nine-page extraction — plan Appendix, "12 pages").
+ * Each keeps its own class prefix, matching the design's convention of one hero per page. The
+ * small floating accent badges (`.ce-hero-float`, `.me-hero-float`, `.qe-hero-float`) are
+ * omitted — a deliberate, bounded simplification, consistent with the existing case-study mock
+ * treatment (an empty decorative box rather than a fully bespoke illustration). */
+
+/* cloud-engineering: a cloud glyph with a small grid of connected nodes over it */
+
+/* mobile-engineering: two overlapping phone mockups, the front one showing a field-ops app */
+
+/* quality-engineering: a floating release panel with a vertical pipeline of stages */

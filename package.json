@@ -1,0 +1,62 @@
+{
+  "name": "sdl-web",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "prebuild": "pnpm verify:env && next typegen",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "verify:env": "tsx scripts/verify-env.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "parity": "tsx e2e/parity/run.ts",
+    "parity:update": "tsx e2e/parity/run.ts --update-baselines",
+    "analyze": "ANALYZE=true next build"
+  },
+  "dependencies": {
+    "next": "16.3.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@eslint/js": "^9.39.5",
+    "@next/bundle-analyzer": "^16.3.4",
+    "@next/eslint-plugin-next": "^16.3.4",
+    "@playwright/test": "^1.63.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^20.19.43",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.39.5",
+    "jsdom": "^25.0.1",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.70.0",
+    "vitest": "^4.1.11"
+  },
+  "comments": {
+    "runtimeDeps": "Deliberately just next + react. The design is hand-authored CSS reproduced verbatim (plan §6.3) — no Tailwind, no CSS-in-JS, no component library, no animation library. Every visual is either lifted CSS, inline SVG, or a canvas ported from the design. Adding a UI dependency here needs a decision recorded in docs/DECISIONS.md.",
+    "noPayloadDependency": "This app must never depend on the payload packages. It talks to the CMS over HTTP only. The single crossing artifact is payload-types.ts, which CI copies from cms/ into lib/.",
+    "pins": "next, react and react-dom pinned exactly to stay inside Payload's supported Next range — the two apps must agree on the Next version.",
+    "parity": "`parity` runs the four-layer design-fidelity harness in tools/visual-parity. Baselines are versioned; updating one is an explicit reviewed commit.",
+    "testDeps": "jsdom + @testing-library/react + @vitejs/plugin-react are the plan-sanctioned component-test stack (§9.1). @playwright/test + @axe-core/playwright drive E2E and accessibility (§9.2, §9.3). pixelmatch + pngjs back the parity harness pixel layer (§9.4). All devDependencies — none ship to the browser."
+  }
+}

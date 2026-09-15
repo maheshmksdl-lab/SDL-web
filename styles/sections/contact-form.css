@@ -1,0 +1,124 @@
+/* contact-form — section styles, verbatim from the design.
+
+   Extracted from D:\sdl\sdl\Payload-cms\sdl-2.0 by tools/visual-parity/split-css.mjs.
+   DO NOT reformat, reorder, normalise the breakpoints, or convert values to a scale —
+   every one of those is a visual change. See web/styles/README.md. */
+
+.sdl-contact-section { position: relative; overflow: hidden; background: #101826; }
+
+.sdl-contact-grid { position: relative; margin-top: 48px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: center; }
+
+.sdl-contact-heading {
+    margin-top: 20px; font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px); line-height: 1.15; color: #FFFFFF;
+  }
+
+.sdl-contact-heading .accent { color: var(--success); }
+
+.sdl-contact-sub-dark { margin-top: 22px; max-width: 420px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.65); }
+
+.sdl-contact-pill {
+    margin-top: 32px; display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 10px 18px 10px 10px;
+    font-size: 13px; color: rgba(255,255,255,0.8);
+  }
+
+.sdl-contact-pill .pill-icon {
+    width: 22px; height: 22px; border-radius: 50%; background: rgba(40,199,111,0.18); color: var(--success);
+    display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;
+  }
+
+.sdl-form-card {
+    position: relative; background: #FBFAF7; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+  }
+
+.sdl-form-card-head {
+    display: flex; justify-content: space-between; padding: 20px 40px 0;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #97A1B0;
+  }
+
+.sdl-form { padding: 16px 40px 40px; }
+
+.sdl-form-row-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.sdl-form-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+.sdl-form-row label { font-size: 13px; font-weight: 700; color: #162833; }
+
+.sdl-form-row label .optional { font-weight: 500; color: #97A1B0; text-transform: none; letter-spacing: 0; }
+
+.sdl-form-row input, .sdl-form-row textarea {
+    font-family: inherit; font-size: 15px; color: #162833; padding: 13px 16px; border-radius: 10px;
+    border: 1.5px solid #E4E9F2; background: #FFFFFF; outline: none; resize: vertical; transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+.sdl-form-row input::placeholder, .sdl-form-row textarea::placeholder { color: #B9C0CC; }
+
+.sdl-form-row input:focus, .sdl-form-row textarea:focus { border-color: var(--accent); background: #FFFFFF; }
+
+.sdl-form-submit {
+    width: 100%; margin-top: 6px; border: none; cursor: pointer; background: var(--accent); color: #FFFFFF;
+    font-weight: 700; font-size: 16px; padding: 16px; border-radius: 999px; font-family: inherit;
+    display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+.sdl-form-submit:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+.sdl-form-submit-icon { display: inline-block; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+.sdl-form-submit:hover .sdl-form-submit-icon { transform: translate(6px, -3px) rotate(12deg); }
+
+.sdl-form-fineprint { margin-top: 14px; text-align: center; font-size: 12.5px; color: #97A1B0; }
+
+.sdl-form-success { display: none; text-align: center; padding: 24px 0; }
+
+.sdl-form-success.show { display: block; }
+
+.sdl-form-success .icon {
+    width: 52px; height: 52px; border-radius: 50%; background: rgba(40,199,111,0.14); color: var(--success);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+  }
+
+.sdl-form-success .title { font-size: 19px; font-weight: 700; color: #162833; }
+
+.sdl-form-success .sub { margin-top: 8px; font-size: 15px; color: #46535F; }
+
+@media (max-width: 1060px) {
+  .sdl-form-row-pair { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1060px) {
+  .sdl-contact-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.sdl-contact-callout-card {
+    margin-top: 40px; max-width: 380px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 24px 26px;
+  }
+
+.sdl-contact-callout-title { font-family: var(--font-manrope), 'Manrope', sans-serif; font-weight: 700; font-size: 17px; color: #FFFFFF; }
+
+.sdl-contact-callout-desc { margin-top: 6px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.6); }
+
+.sdl-contact-callout-cta {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+    color: var(--success); font-weight: 700; font-size: 14px;
+  }
+
+.sdl-contact-callout-cta:hover { color: #FFFFFF; }
+
+.sdl-form-row input, .sdl-form-row textarea, .sdl-form-row select {
+    font-family: inherit; font-size: 15px; color: #162833; padding: 13px 16px; border-radius: 10px;
+    border: 1.5px solid #E4E9F2; background: #FFFFFF; outline: none; resize: vertical; transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+.sdl-form-row select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2397A1B0' stroke-width='1.6' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+
+.sdl-form-row select:invalid { color: #B9C0CC; }
+
+.sdl-form-row input:focus, .sdl-form-row textarea:focus, .sdl-form-row select:focus { border-color: var(--accent); background-color: #FFFFFF; }
+
+@media (max-width: 1060px) {
+  .svc-form-row-pair { grid-template-columns: 1fr; }
+}

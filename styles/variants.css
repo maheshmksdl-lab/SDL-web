@@ -1,0 +1,155 @@
+/* Page-template variants.
+
+   The design uses four type scales, expressed by declaring the SAME selector with different
+   values in each page's stylesheet. De-duplicating that into one shared file (sanctioned
+   deviation #2) means the differences have to be re-expressed as scoped overrides — otherwise
+   one page's values would silently apply to all nine.
+
+   The base value in chrome.css / sections/*.css is the MAJORITY value (the six service-detail
+   pages). This file restores the minority values, scoped by the page-template modifier that
+   `app/[[...slug]]/page.tsx` puts on the page wrapper from the Pages `template` field.
+
+       template        modifier                    design page
+       ───────────     ─────────────────────       ──────────────────────────────────────────
+       service         (none — this is the base)   ai-, business-, digital-engineering,
+                                                   digital-experience, growth-transformation,
+                                                   evoq
+       home            .sdl-page--home             index
+       services        .sdl-page--services         services
+       sub-service     .sdl-page--sub-service      web-application-engineering
+
+   Only the DIFFERING declarations are restated; everything else cascades from the base rule.
+   Each block below cites the design file it came from, so any value can be traced back.
+
+   Computed output is identical to the original per-page stylesheets. The parity harness
+   (tools/visual-parity) verifies that claim — Layer 1 compares computed styles, and any drift
+   introduced here shows up there.
+
+   Loaded AFTER chrome.css and sections/*.css. See app/globals.css. */
+
+/* ── home — index.html ────────────────────────────────────────────────────── */
+
+/* index: 48px/1.22. Base (service pages): clamp(40px, 4.6vw, 58px)/1.18.
+   The design's own `@media (max-width: 1060px) { font-size: 38px !important }` still wins
+   below 1060px — it carries !important, so this higher-specificity rule cannot shadow it. */
+.sdl-page--home .sdl-hero-copy {
+  font-size: 48px;
+  line-height: 1.22;
+}
+
+/* index declares `.sdl-cta-link--sm` with only a transition, so it inherits `.sdl-cta-link`'s
+   font-size and gap. Every other page narrows it to 13px/6px. Restated explicitly here because
+   CSS cannot "unset back to the rule this one overrides". Values are `.sdl-cta-link`'s own. */
+.sdl-page--home .sdl-cta-link--sm {
+  font-size: 16px;
+  gap: 8px;
+}
+
+/* ── services — services.html ─────────────────────────────────────────────── */
+
+/* services: 48px, line-height 1.18 (same as base — only the size differs). */
+.sdl-page--services .sdl-hero-copy {
+  font-size: 48px;
+}
+
+/* ── sub-service — web-application-engineering.html ───────────────────────── */
+
+/* The sub-service page runs a consistently smaller type scale and a different hero accent. */
+/* 48px since the design standardised every hero title on the home page's fixed size (38px below
+   1060px, via the shared `!important` rule). It was previously a viewport-scaled clamp. */
+.sdl-page--sub-service .sdl-hero-copy {
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+/* Not var(--accent) — this page uses the lighter blue from the motif ramp. */
+.sdl-page--sub-service .sdl-hero-copy .accent {
+  color: #2B8FDB;
+}
+
+.sdl-page--sub-service .sdl-hero-sub {
+  margin-top: 26px;
+  font-size: 18px;
+  max-width: 500px;
+}
+
+.sdl-page--sub-service .sdl-hero-actions {
+  margin-top: 40px;
+}
+
+/* This page bakes the spacing into the class; every other page applies it as an inline
+   `style="margin-top:18px"` at the call site, which the section components reproduce. */
+.sdl-page--sub-service .sdl-section-title {
+  margin: 18px 0 0;
+}
+
+/* ── Differences deliberately MERGED rather than scoped ────────────────────
+ *
+ * Two selectors differed between index.html and services.html but did not need a variant,
+ * because taking index's (larger) version changes nothing on services. Recorded here so the
+ * decision is auditable rather than looking like an extraction slip:
+ *
+ *   .sdl-pillars
+ *     index    position: relative; overflow: hidden; background: #FFFFFF; padding: 96px 48px 108px
+ *     services background: #FFFFFF; padding: 96px 48px 108px
+ *     → services.html does not use this class at all; its capabilities section is `.svc-caps`.
+ *       The services copy is dead code, so index's version is kept unconditionally.
+ *
+ *   .sdl-pillars-inner
+ *     index    position: relative; z-index: 1; max-width: 1360px; margin: 0 auto
+ *     services max-width: 1360px; margin: 0 auto
+ *     → services DOES use this class (inside `.svc-caps`), but its subtree contains no
+ *       absolutely-positioned descendants, so establishing a containing block and a stacking
+ *       context has no visual effect there. index needs both for its background glyph and
+ *       blueprint SVG.
+ *
+ * Both claims are assertions about rendered output, so the parity harness is what confirms
+ * them: if either is wrong, services.html Layer 1 / Layer 2 fails and the fix is to scope them
+ * under .sdl-page--services like the rules above.
+ */
+
+/* ── headerVariant: transparent ───────────────────────────────────────────────
+ *
+ * Backs the Pages `headerVariant` field (plan §4.1). NOT a design deviation: the nine supplied
+ * pages all use the default (opaque) header, so this rule never applies to them and the parity
+ * harness is unaffected. It only takes effect when an editor deliberately sets a page to
+ * "Transparent" — a focused landing page with a full-bleed hero, which the design does not ship
+ * but the plan's field anticipates.
+ *
+ * Additive only: it overrides nothing in the extracted `.sdl-header` rule for the default case. */
+.sdl-header--transparent {
+  position: absolute;
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+/* ── Page themes ──────────────────────────────────────────────────────────────
+ *
+ * The few values a design page sets on SHARED selectors rather than on its own prefixed classes.
+ * Everything prefixed (`.bt-*`, `.ce-*`, …) is lifted into styles/pages/<theme>.css; this is the
+ * unprefixed remainder, scoped by the `sdl-theme--<theme>` class that app/[[...slug]]/page.tsx
+ * puts on <main> (lib/theme.ts). Each block cites the design file it came from. */
+
+/* business-transformation.html, digital-engineering.html — the hero CTAs keep a 28px gap side by
+   side but close to 12px when they wrap. */
+.sdl-theme--bt .sdl-hero-actions,
+.sdl-theme--de .sdl-hero-actions {
+  column-gap: 28px;
+  row-gap: 12px;
+}
+
+/* cloud-, mobile- and quality-engineering.html — each sub-service page's own hero accent.
+   web-application-engineering keeps the sub-service default above. */
+.sdl-page--sub-service.sdl-theme--ce .sdl-hero-copy .accent { color: #0EA5E9; }
+.sdl-page--sub-service.sdl-theme--me .sdl-hero-copy .accent { color: #22B368; }
+.sdl-page--sub-service.sdl-theme--qe .sdl-hero-copy .accent { color: #C9941F; }
+
+/* evoq.html — its light sections carry a faint dot grid. (The design also dots `body`, but the
+   page's full-height wrapper paints over it, so only the sections show it.) */
+.sdl-theme--evoq .sdl-section--alt {
+  background: radial-gradient(rgba(16,24,40,0.05) 1px, transparent 1.6px) 0 0/26px 26px, #F6F8FC;
+}
+.sdl-theme--evoq .sdl-section--white {
+  background: radial-gradient(rgba(16,24,40,0.045) 1px, transparent 1.6px) 0 0/26px 26px, #FFFFFF;
+}

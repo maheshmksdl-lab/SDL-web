@@ -8,7 +8,7 @@
  * Scoped entirely under .sdl-article, so it cannot leak into a page-builder page. */
 
 .sdl-article-header .sdl-section-inner {
-  max-width: 760px;
+  max-width: 1250px;
 }
 
 .sdl-article-title {
@@ -163,4 +163,217 @@
   .sdl-article-body {
     font-size: 17px;
   }
+}
+
+/* ── Article header, breadcrumb and sidebar ────────────────────────────────
+ *
+ * The design pairs the title with the hero image rather than stacking them, then runs the body
+ * in a narrower column beside a related/tags rail. Added for the insight detail route; every
+ * rule below is scoped under .sdl-article so no page-builder section can pick them up.
+ */
+
+.sdl-article-header__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-block: clamp(2rem, 4vw, 3.25rem);
+}
+
+@media (max-width: 860px) {
+  .sdl-article-header__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.sdl-article-header__figure {
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: 16 / 10;
+  background: #f2f5f8;
+}
+
+.sdl-article-header__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sdl-article-header__figure.sdl-article-figure--swatch {
+  background: var(--swatch, var(--accent));
+}
+
+.sdl-article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--body-text);
+  font-size: 0.88rem;
+}
+
+/* The red rule under the crumbs is the design's own divider. */
+.sdl-article-crumbs {
+  border-bottom: 2px solid var(--critical);
+  background: #fff;
+}
+
+.sdl-article-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0.85rem 0;
+  list-style: none;
+  color: var(--body-text);
+  font-size: 0.82rem;
+}
+
+.sdl-article-crumbs li + li::before {
+  content: '/';
+  margin-right: 0.45rem;
+  color: #b9c2cb;
+}
+
+.sdl-article-crumbs a {
+  color: var(--body-text);
+  text-decoration: none;
+}
+
+.sdl-article-crumbs a:hover {
+  color: var(--accent);
+}
+
+.sdl-article-crumbs li[aria-current='page'] {
+  color: var(--accent);
+}
+
+.sdl-article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  align-items: start;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+@media (max-width: 960px) {
+  .sdl-article-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.sdl-article-aside {
+  display: grid;
+  gap: 1.25rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .sdl-article-aside {
+    position: static;
+  }
+}
+
+.sdl-article-aside__card {
+  border: 1px solid #e8ebef;
+  border-radius: 12px;
+  padding: 1.1rem 1.15rem 1.25rem;
+  background: #fff;
+}
+
+.sdl-article-aside__card h2 {
+  margin: 0 0 0.85rem;
+  color: var(--heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.sdl-article-aside .sdl-article-related {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sdl-article-aside .sdl-article-related li {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.sdl-article-aside .sdl-article-related a {
+  color: var(--accent);
+  font-size: 0.87rem;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.sdl-article-aside .sdl-article-related a:hover {
+  text-decoration: underline;
+}
+
+.sdl-article-aside .sdl-article-related time {
+  color: #8d98a3;
+  font-size: 0.78rem;
+}
+
+.sdl-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sdl-article-tags a {
+  display: inline-flex;
+  border: 1px solid color-mix(in srgb, var(--critical) 35%, #fff);
+  border-radius: 6px;
+  padding: 0.28rem 0.6rem;
+  background: color-mix(in srgb, var(--critical) 7%, #fff);
+  color: var(--body-text);
+  font-size: 0.76rem;
+  text-decoration: none;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.sdl-article-tags a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ── Images placed in the body through the editor ──────────────────────────
+ *
+ * Rendered by the `upload` node in lib/lexical.tsx. The design shows these full-width in the
+ * prose column with a small italic caption beneath.
+ */
+
+.sdl-article-embed {
+  margin: 1.75rem 0;
+}
+
+.sdl-article-embed img {
+  /* Never wider than the prose column, and never distorted: the intrinsic ratio is kept
+     whichever of width/height the media document happened to supply. */
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.sdl-article-embed figcaption {
+  margin-top: 0.6rem;
+  color: var(--body-text);
+  font-size: 0.83rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.sdl-article-embed__credit {
+  font-style: normal;
+  opacity: 0.75;
 }

@@ -4,7 +4,7 @@ import { cmsFetch, query, type Paginated } from './client'
 import { tags } from './tags'
 import type {
   CaseStudy, Client, Footer, Form, Header, Insight, InsightCategory,
-  Page, Redirect, Service, SiteSetting, Testimonial,
+  Page, Product, Redirect, Service, SiteSetting, Testimonial,
 } from '../payload-types'
 
 /**
@@ -37,6 +37,31 @@ export const getPageByPathname = cache(async (pathname: string): Promise<Page | 
     { tags: [tags.page(pathname), tags.pages] },
   )
   return result.docs[0] ?? null
+})
+
+/**
+ * The same lookup, for a route where the page document is OPTIONAL.
+ *
+ * `getPageByPathname` deliberately has no fallback: on a page route, a CMS outage must fail
+ * loudly rather than render a blank page as though the content had been deleted. That is right
+ * there and wrong for /insights, where the CMS page only supplies the hero above a listing that
+ * stands on its own — the route already renders a fallback header when no page exists.
+ *
+ * Without this, an unreachable CMS took the whole build down: `Export encountered an error on
+ * /insights/page`, killing every other page with it, on a route designed to work without that
+ * document.
+ */
+export const getOptionalPageByPathname = cache(async (pathname: string): Promise<Page | null> => {
+  try {
+    return await getPageByPathname(pathname)
+  } catch (error) {
+    console.warn(
+      `[cms] optional page ${pathname} could not be loaded (${
+        error instanceof Error ? error.message : String(error)
+      }) — rendering without it`,
+    )
+    return null
+  }
 })
 
 /** Pathnames for generateStaticParams. Published only — drafts are not pre-rendered. */
@@ -150,6 +175,36 @@ export async function getInsightSlugs(): Promise<string[]> {
     { tags: [tags.insights], draft: false, fallback: emptyPage as Paginated<Pick<Insight, 'slug'>> },
   )
   return result.docs.map((d) => d.slug).filter((s): s is string => typeof s === 'string')
+}
+
+/**
+ * Every published insight, for the index at /insights.
+ *
+ * The whole set in one read, filtered in the browser rather than per-request on the server.
+ * That is a deliberate trade and it rests on two things the reference design asks for: a COUNT
+ * beside every facet, and combinations across three groups. Counting server-side means one
+ * query per facet per render, and each additional checkbox is another round trip with a visible
+ * pause — for a marketing archive of a few hundred articles the entire payload is smaller than
+ * one of the card images.
+ *
+ * `depth: 1` resolves category, services, products and the thumbnail, which is everything a
+ * card and a facet need. If this ever outgrows a single page, the seam is here: swap for a
+ * paged, server-filtered query and move the counts into a Payload aggregation endpoint.
+ */
+export async function getAllInsights(): Promise<Insight[]> {
+  const result = await cmsFetch<Paginated<Insight>>(
+    `/api/insights${query({ sort: '-publishedAt', limit: 1000, depth: 1 })}`,
+    { tags: [tags.insights], fallback: emptyPage as Paginated<Insight> },
+  )
+  return result.docs
+}
+
+export async function getProducts(): Promise<Product[]> {
+  const result = await cmsFetch<Paginated<Product>>(
+    `/api/products${query({ sort: 'order', limit: 100, depth: 0 })}`,
+    { tags: [tags.products], fallback: emptyPage as Paginated<Product> },
+  )
+  return result.docs
 }
 
 export async function getInsightCategories(): Promise<InsightCategory[]> {

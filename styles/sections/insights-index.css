@@ -1,0 +1,509 @@
+/* The /insights index — hero, facet sidebar and card grid.
+ *
+ * A collection-detail route's stylesheet, not a page-builder section's, so it sits beside
+ * article.css in the import chain. Everything is scoped under .sdl-insights-* and the page
+ * accent is the SDL blue token, never a literal.
+ */
+
+/* ── Fallback hero (only when no /insights page exists in the CMS) ────────── */
+
+.sdl-insights-hero {
+  padding: clamp(3.5rem, 8vw, 6.5rem) 0;
+  background: var(--heading);
+  color: #fff;
+  text-align: center;
+}
+
+.sdl-insights-hero h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  line-height: 1.1;
+}
+
+.sdl-insights-hero p {
+  max-width: 46rem;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+
+.sdl-insights-section {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.sdl-insights-index {
+  display: grid;
+  grid-template-columns: minmax(230px, 275px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (max-width: 900px) {
+  .sdl-insights-index {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+
+.sdl-insights-sidebar {
+  display: grid;
+  gap: 1rem;
+  /* Follows the reader down a long result list; released on narrow screens where it stacks. */
+  position: sticky;
+  top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .sdl-insights-sidebar {
+    position: static;
+  }
+}
+
+.sdl-insights-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sdl-insights-search svg {
+  position: absolute;
+  left: 0.85rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: #9aa4ae;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.sdl-insights-search input {
+  width: 100%;
+  border: 1px solid #e3e7ec;
+  border-radius: 10px;
+  padding: 0.78rem 0.9rem 0.78rem 2.5rem;
+  background: #fff;
+  color: var(--heading);
+  font: inherit;
+  font-size: 0.93rem;
+}
+
+.sdl-insights-search input::placeholder {
+  color: #9aa4ae;
+}
+
+.sdl-insights-search input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.sdl-insights-filters {
+  border: 1px solid #e8ebef;
+  border-radius: 14px;
+  padding: 1.15rem 1.1rem 1.4rem;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(22, 40, 51, 0.05);
+}
+
+.sdl-insights-filters__head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+}
+
+.sdl-insights-filters__head h2 {
+  margin: 0;
+  color: var(--heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sdl-insights-filters__icon {
+  display: inline-flex;
+  width: 1.9rem;
+  height: 1.9rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 12%, #fff);
+}
+
+.sdl-insights-filters__icon svg {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--accent);
+}
+
+.sdl-insights-filters__clear {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sdl-insights-filters__clear:hover {
+  text-decoration: underline;
+}
+
+.sdl-insights-group + .sdl-insights-group {
+  margin-top: 0.4rem;
+  border-top: 1px solid #eef1f4;
+  padding-top: 0.4rem;
+}
+
+.sdl-insights-group__toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 0;
+  padding: 0.65rem 0;
+  background: none;
+  color: var(--heading);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sdl-insights-group__toggle svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: #8d98a3;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 160ms ease;
+}
+
+.sdl-insights-group__toggle svg[data-open='false'] {
+  transform: rotate(180deg);
+}
+
+.sdl-insights-group__list {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sdl-insights-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 7px;
+  padding: 0.42rem 0.4rem;
+  color: var(--body-text);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.sdl-insights-option:hover {
+  background: #f6f8fb;
+}
+
+/* Empty facets stay legible but recede — present, not advertised. */
+.sdl-insights-option[data-empty='true'] .sdl-insights-option__label,
+.sdl-insights-option[data-empty='true'] .sdl-insights-option__count {
+  opacity: 0.55;
+}
+
+/* The native box is replaced by the drawn one, but stays focusable and announced. */
+.sdl-insights-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sdl-insights-option__box {
+  position: relative;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: 0 0 auto;
+  border: 1.5px solid #cdd4dc;
+  border-radius: 4px;
+  background: #fff;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+
+.sdl-insights-option input:checked + .sdl-insights-option__box {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.sdl-insights-option input:checked + .sdl-insights-option__box::after {
+  content: '';
+  position: absolute;
+  top: 0.12rem;
+  left: 0.3rem;
+  width: 0.28rem;
+  height: 0.55rem;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.sdl-insights-option input:focus-visible + .sdl-insights-option__box {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sdl-insights-option__label {
+  flex: 1 1 auto;
+}
+
+.sdl-insights-option__count {
+  color: #8d98a3;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Results ──────────────────────────────────────────────────────────────── */
+
+.sdl-insights-results__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.sdl-insights-results__title {
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+}
+
+.sdl-insights-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--body-text);
+  font-size: 0.88rem;
+}
+
+.sdl-insights-sort select {
+  border: 1px solid #e3e7ec;
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  background: #fff;
+  color: var(--heading);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.sdl-insights-sort select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.sdl-insights-empty {
+  margin: 0;
+  border: 1px dashed #dfe4ea;
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  color: var(--body-text);
+  text-align: center;
+}
+
+.sdl-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 1.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+
+.sdl-insights-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #edf0f3;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(22, 40, 51, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.sdl-insights-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 38px rgba(22, 40, 51, 0.1);
+}
+
+.sdl-insights-card__media {
+  display: block;
+  /* `flex: 0 0 auto` is load-bearing: the card is a column flex container, and without it the
+     media is a shrinkable item whose aspect-ratio loses to the body's content height. */
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f2f5f8;
+}
+
+.sdl-insights-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No thumbnail: the design's solid swatch, cycled per article. */
+.sdl-insights-card__swatch {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+}
+
+.sdl-insights-card__swatch[data-swatch='success'] {
+  background: var(--success);
+}
+
+.sdl-insights-card__swatch[data-swatch='attention'] {
+  background: var(--attention);
+}
+
+.sdl-insights-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem 1.05rem 1.15rem;
+}
+
+.sdl-insights-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sdl-insights-card__badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  background: color-mix(in srgb, var(--accent) 12%, #fff);
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.sdl-insights-card__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  color: #8d98a3;
+  font-size: 0.76rem;
+}
+
+.sdl-insights-card__time svg {
+  width: 0.86rem;
+  height: 0.86rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.sdl-insights-card__title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.38;
+  font-weight: 700;
+}
+
+.sdl-insights-card__title a {
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.sdl-insights-card__title a:hover {
+  color: var(--accent);
+}
+
+.sdl-insights-card__excerpt {
+  /* Clamped so a long excerpt cannot make one card tower over its neighbours. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  color: var(--body-text);
+  font-size: 0.87rem;
+  line-height: 1.55;
+}
+
+.sdl-insights-card__cta {
+  display: block;
+  margin-top: auto;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  color: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.sdl-insights-card__cta:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── Pager ────────────────────────────────────────────────────────────────── */
+
+.sdl-insights-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.25rem;
+}
+
+.sdl-insights-more button {
+  border: 0;
+  border-radius: 9px;
+  padding: 0.8rem 1.6rem;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.sdl-insights-more button:hover {
+  background: var(--accent-hover);
+}
+
+.sdl-insights-more button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

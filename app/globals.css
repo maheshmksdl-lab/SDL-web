@@ -58,8 +58,9 @@
 @import '../styles/pages/zh.css';
 @import '../styles/pages/sf.css';
 
-/* Collection-detail route (not a page-builder block). Fully scoped under .sdl-article. */
+/* Collection-detail routes (not page-builder blocks). Fully scoped under their own prefixes. */
 @import '../styles/sections/article.css';
+@import '../styles/sections/insights-index.css';
 
 @import '../styles/variants.css';
 

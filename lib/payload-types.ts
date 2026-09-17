@@ -72,6 +72,7 @@ export interface Config {
     services: Service;
     'case-studies': CaseStudy;
     'insight-categories': InsightCategory;
+    products: Product;
     clients: Client;
     testimonials: Testimonial;
     redirects: Redirect;
@@ -95,6 +96,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     'insight-categories': InsightCategoriesSelect<false> | InsightCategoriesSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     clients: ClientsSelect<false> | ClientsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -3232,11 +3234,38 @@ export interface Insight {
    * Optional. Cards with no image fall back to the solid swatch above, as the design does.
    */
   thumbnail?: (number | null) | Media;
+  /**
+   * Filters this article under these service pillars.
+   */
+  services?: (number | Service)[] | null;
+  /**
+   * Filters this article under these products.
+   */
+  products?: (number | Product)[] | null;
+  /**
+   * Free-text labels shown in the article sidebar. Not a filter facet.
+   */
+  tags?: string[] | null;
   featured?: boolean | null;
   publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * Product modules. Used as a filter on the insights index.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  label: string;
+  slug: string;
+  shortDesc?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Field definitions, success copy and where submissions are sent.
@@ -3616,6 +3645,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'insight-categories';
         value: number | InsightCategory;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: number | Product;
       } | null)
     | ({
         relationTo: 'clients';
@@ -4630,6 +4663,9 @@ export interface InsightsSelect<T extends boolean = true> {
   author?: T;
   swatch?: T;
   thumbnail?: T;
+  services?: T;
+  products?: T;
+  tags?: T;
   featured?: T;
   publishedAt?: T;
   updatedAt?: T;
@@ -4702,6 +4738,18 @@ export interface CaseStudiesSelect<T extends boolean = true> {
 export interface InsightCategoriesSelect<T extends boolean = true> {
   label?: T;
   slug?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  label?: T;
+  slug?: T;
+  shortDesc?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -5457,6 +5505,7 @@ export interface RoleModuleVisibility {
           | 'insights'
           | 'insight-categories'
           | 'services'
+          | 'products'
           | 'case-studies'
           | 'clients'
           | 'testimonials'

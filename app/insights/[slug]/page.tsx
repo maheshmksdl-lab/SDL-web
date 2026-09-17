@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { SiteHeader } from '@/components/chrome/site-header'
 import { SiteFooter } from '@/components/chrome/site-footer'
@@ -76,9 +77,29 @@ export default async function InsightPage(props: PageProps<'/insights/[slug]'>) 
   const published = formatDate(insight.publishedAt)
   const swatch = swatchVar[insight.swatch ?? 'accent'] ?? swatchVar.accent
 
-  const related = (await getInsights({ limit: 4 }))
-    .filter((i) => i.slug !== insight.slug)
-    .slice(0, 3)
+  /*
+   * Related reading, preferring the same category before falling back to the newest.
+   *
+   * Two reads rather than one filtered read because "same category" can legitimately return
+   * nothing — a category with a single article — and a sidebar that empties itself in that case
+   * looks broken. The fallback is queried unconditionally so both are in flight together.
+   */
+  const categoryId =
+    typeof insight.category === 'object' && insight.category
+      ? insight.category.id
+      : (insight.category ?? null)
+
+  const [sameCategory, newest] = await Promise.all([
+    categoryId ? getInsights({ limit: 6, categoryId }) : Promise.resolve([]),
+    getInsights({ limit: 8 }),
+  ])
+
+  const related = [...sameCategory, ...newest]
+    .filter((item, index, all) => all.findIndex((other) => other.id === item.id) === index)
+    .filter((item) => item.slug !== insight.slug)
+    .slice(0, 5)
+
+  const tags = (insight.tags ?? []).filter((tag): tag is string => Boolean(tag?.trim()))
 
   const ld = jsonLdScript([
     breadcrumbJsonLd(`/insights/${slug}`, { [`/insights/${slug}`]: insight.title }),
@@ -89,67 +110,111 @@ export default async function InsightPage(props: PageProps<'/insights/[slug]'>) 
     <>
       <SiteHeader header={header} />
 
-      <main id="main" className="sdl-page">
+      <main id="main" className="sdl-page sdl-page--article">
         <article className="sdl-article">
-          <header className="sdl-section sdl-section--white sdl-article-header">
-            <div className="sdl-section-inner">
-              {category ? <Kicker>{category}</Kicker> : null}
-              <h1 className="sdl-article-title">{insight.title}</h1>
-              {insight.excerpt ? <p className="sdl-article-standfirst">{insight.excerpt}</p> : null}
-              <p className="sdl-article-meta">
-                {insight.author ? <span>{insight.author}</span> : null}
-                {insight.author && published ? <span aria-hidden="true"> · </span> : null}
-                {published ? <time dateTime={insight.publishedAt ?? undefined}>{published}</time> : null}
-                {insight.readTime ? (
-                  <>
-                    <span aria-hidden="true"> · </span>
-                    <span>{insight.readTime}</span>
-                  </>
-                ) : null}
-              </p>
+          {/* Title beside the hero image, as the design lays it out. */}
+          <header className="sdl-article-header">
+            <div className="sdl-section-inner sdl-article-header__inner">
+              <div className="sdl-article-header__text">
+                {category ? <Kicker>{category}</Kicker> : null}
+                <h1 className="sdl-article-title">{insight.title}</h1>
+                <p className="sdl-article-meta">
+                  {published ? (
+                    <time dateTime={insight.publishedAt ?? undefined}>{published}</time>
+                  ) : null}
+                  {published && insight.author ? <span aria-hidden="true">·</span> : null}
+                  {insight.author ? <span>By {insight.author}</span> : null}
+                  {insight.readTime ? (
+                    <>
+                      <span aria-hidden="true">·</span>
+                      <span>{insight.readTime}</span>
+                    </>
+                  ) : null}
+                </p>
+              </div>
+
+              {hero ? (
+                <div className="sdl-article-header__figure">
+                  <Image
+                    src={hero.src}
+                    alt={hero.alt || insight.title}
+                    width={hero.width ?? 1200}
+                    height={hero.height ?? 630}
+                    sizes="(max-width: 900px) 100vw, 560px"
+                    priority
+                  />
+                </div>
+              ) : (
+                <div
+                  className="sdl-article-header__figure sdl-article-figure--swatch"
+                  style={{ '--swatch': swatch } as React.CSSProperties}
+                />
+              )}
             </div>
           </header>
 
-          {hero ? (
-            <div className="sdl-article-figure sdl-section-inner">
-              <Image
-                src={hero.src}
-                alt={hero.alt || insight.title}
-                width={hero.width ?? 1200}
-                height={hero.height ?? 630}
-                sizes="(max-width: 900px) 100vw, 1120px"
-                priority
-              />
+          <nav className="sdl-article-crumbs" aria-label="Breadcrumb">
+            <div className="sdl-section-inner">
+              <ol>
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/insights">Insights</Link>
+                </li>
+                <li aria-current="page">{insight.title}</li>
+              </ol>
             </div>
-          ) : (
-            <div
-              className="sdl-article-figure sdl-article-figure--swatch sdl-section-inner"
-              style={{ '--swatch': swatch } as React.CSSProperties}
-            />
-          )}
+          </nav>
 
           <div className="sdl-section sdl-section--white sdl-article-body-section">
-            <div className="sdl-article-body sdl-section-inner">
-              <RichText content={insight.body} />
+            <div className="sdl-section-inner sdl-article-layout">
+              <div className="sdl-article-body">
+                {insight.excerpt ? (
+                  <p className="sdl-article-standfirst">{insight.excerpt}</p>
+                ) : null}
+                <RichText content={insight.body} />
+              </div>
+
+              {/* Rendered only when it has something in it, so an article with neither
+                  related reading nor tags keeps the full column width. */}
+              {related.length || tags.length ? (
+                <aside className="sdl-article-aside">
+                  {related.length ? (
+                    <section className="sdl-article-aside__card">
+                      <h2>Related Blogs</h2>
+                      <ul className="sdl-article-related">
+                        {related.map((item) => (
+                          <li key={item.id}>
+                            <Link href={`/insights/${item.slug}`}>{item.title}</Link>
+                            {formatDate(item.publishedAt) ? (
+                              <time dateTime={item.publishedAt ?? undefined}>
+                                {formatDate(item.publishedAt)}
+                              </time>
+                            ) : null}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ) : null}
+
+                  {tags.length ? (
+                    <section className="sdl-article-aside__card">
+                      <h2>Tags</h2>
+                      <ul className="sdl-article-tags">
+                        {tags.map((tag) => (
+                          <li key={tag}>
+                            <Link href={`/insights?tag=${encodeURIComponent(tag)}`}>{tag}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ) : null}
+                </aside>
+              ) : null}
             </div>
           </div>
         </article>
-
-        {related.length ? (
-          <section className="sdl-section sdl-section--alt">
-            <div className="sdl-section-inner">
-              <Kicker>More insights</Kicker>
-              <ul className="sdl-article-related">
-                {related.map((item) => (
-                  <li key={item.id}>
-                    <a href={`/insights/${item.slug}`}>{item.title}</a>
-                    {item.readTime ? <span>{item.readTime}</span> : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        ) : null}
       </main>
 
       <SiteFooter footer={footer} />

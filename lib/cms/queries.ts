@@ -4,7 +4,7 @@ import { cmsFetch, query, type Paginated } from './client'
 import { tags } from './tags'
 import type {
   CaseStudy, Client, Footer, Form, Header, Insight, InsightCategory,
-  Page, Redirect, Service, SiteSetting, Testimonial,
+  Page, Product, Redirect, Service, SiteSetting, Testimonial,
 } from '../payload-types'
 
 /**
@@ -150,6 +150,36 @@ export async function getInsightSlugs(): Promise<string[]> {
     { tags: [tags.insights], draft: false, fallback: emptyPage as Paginated<Pick<Insight, 'slug'>> },
   )
   return result.docs.map((d) => d.slug).filter((s): s is string => typeof s === 'string')
+}
+
+/**
+ * Every published insight, for the index at /insights.
+ *
+ * The whole set in one read, filtered in the browser rather than per-request on the server.
+ * That is a deliberate trade and it rests on two things the reference design asks for: a COUNT
+ * beside every facet, and combinations across three groups. Counting server-side means one
+ * query per facet per render, and each additional checkbox is another round trip with a visible
+ * pause — for a marketing archive of a few hundred articles the entire payload is smaller than
+ * one of the card images.
+ *
+ * `depth: 1` resolves category, services, products and the thumbnail, which is everything a
+ * card and a facet need. If this ever outgrows a single page, the seam is here: swap for a
+ * paged, server-filtered query and move the counts into a Payload aggregation endpoint.
+ */
+export async function getAllInsights(): Promise<Insight[]> {
+  const result = await cmsFetch<Paginated<Insight>>(
+    `/api/insights${query({ sort: '-publishedAt', limit: 1000, depth: 1 })}`,
+    { tags: [tags.insights], fallback: emptyPage as Paginated<Insight> },
+  )
+  return result.docs
+}
+
+export async function getProducts(): Promise<Product[]> {
+  const result = await cmsFetch<Paginated<Product>>(
+    `/api/products${query({ sort: 'order', limit: 100, depth: 0 })}`,
+    { tags: [tags.products], fallback: emptyPage as Paginated<Product> },
+  )
+  return result.docs
 }
 
 export async function getInsightCategories(): Promise<InsightCategory[]> {

@@ -18,6 +18,7 @@ export const tags = {
   insightCategories: 'insight-categories',
 
   services: 'services',
+  products: 'products',
   caseStudies: 'case-studies',
   clients: 'clients',
   testimonials: 'testimonials',

@@ -577,6 +577,91 @@ export function HeroVisual({
       )
     }
 
+    case 'insights-feed':
+      // The /insights index has no design-source hero (it postdates the sdl-2.0 extraction), so
+      // this is a bespoke infographic rather than a lifted one — a content-feed mockup in the
+      // same grid+glow+float recipe as ce-cloud/qe-pipeline, in the site's default SDL blue
+      // rather than a page-themed colour.
+      return (
+        <div className="ins-hero-visual" aria-hidden="true">
+          <div className="ins-hero-grid" />
+          <div className="ins-hero-glow" />
+
+          <div className="ins-hero-panel">
+            <div className="ins-hero-panel-head">
+              <span className="ins-hero-panel-title">Latest thinking</span>
+              <span className="ins-hero-panel-badge">Updated weekly</span>
+            </div>
+            <div className="ins-hero-feed">
+              <div className="ins-hero-row">
+                <span className="ins-hero-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 3v5h5" />
+                    <path d="M6 3h8l5 5v13H6z" />
+                    <path d="M9 13h6M9 17h6" />
+                  </svg>
+                </span>
+                <div className="ins-hero-row-body">
+                  <span className="ins-hero-row-title-bar" />
+                  <span className="ins-hero-row-meta-bar" />
+                </div>
+                <span className="ins-hero-row-tag ins-hero-row-tag--blog">Blog</span>
+              </div>
+              <div className="ins-hero-row">
+                <span className="ins-hero-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 12l7-7 4 4 7-7" />
+                    <path d="M14 3h7v7" />
+                  </svg>
+                </span>
+                <div className="ins-hero-row-body">
+                  <span className="ins-hero-row-title-bar" />
+                  <span className="ins-hero-row-meta-bar" />
+                </div>
+                <span className="ins-hero-row-tag ins-hero-row-tag--case">Case study</span>
+              </div>
+              <div className="ins-hero-row">
+                <span className="ins-hero-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+                  </svg>
+                </span>
+                <div className="ins-hero-row-body">
+                  <span className="ins-hero-row-title-bar" />
+                  <span className="ins-hero-row-meta-bar" />
+                </div>
+                <span className="ins-hero-row-tag ins-hero-row-tag--paper">Whitepaper</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="ins-hero-float ins-hero-float--reach">
+            <span className="ins-hero-float-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3Z" />
+              </svg>
+            </span>
+            <div>
+              <div className="ins-hero-float-title">Practical thinking</div>
+              <div className="ins-hero-float-sub">AI, engineering &amp; growth</div>
+            </div>
+          </div>
+          <div className="ins-hero-float ins-hero-float--fresh">
+            <span className="ins-hero-float-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                <path d="M21 3v6h-6" />
+              </svg>
+            </span>
+            <div>
+              <div className="ins-hero-float-title">Updated regularly</div>
+              <div className="ins-hero-float-sub">New articles every week</div>
+            </div>
+          </div>
+        </div>
+      )
+
     case 'none':
     default:
       return null

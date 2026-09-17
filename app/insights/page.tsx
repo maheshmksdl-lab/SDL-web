@@ -4,6 +4,8 @@ import { RenderBlocks } from '@/components/render-blocks'
 import { SiteHeader } from '@/components/chrome/site-header'
 import { SiteFooter } from '@/components/chrome/site-footer'
 import { InsightsExplorer } from '@/components/insights/insights-explorer'
+import { HeroVisual } from '@/components/sections/hero/hero-visual'
+import { AccentLines, Kicker, type HeadingLine } from '@/components/ui/primitives'
 import {
   getAllInsights, getFooter, getHeader, getOptionalPageByPathname, getProducts, getServices,
   getSiteSettings,
@@ -36,6 +38,11 @@ const PATHNAME = '/insights'
 const FALLBACK_TITLE = 'Insights'
 const FALLBACK_INTRO =
   'Explore our collection of blogs, case studies, and whitepapers for valuable insights into the world of IT and digital transformation.'
+
+/* Echoes the `insightsTitle` copy the design already uses for this section on other pages
+   (src/seeds/design.ts), split into the two-line kicker + accent-heading shape EVOQ's own hero
+   uses, so the banner reads as one more inner page rather than a bespoke one-off. */
+const FALLBACK_HEADING_LINES: HeadingLine[] = [{ before: 'Ideas for' }, { accent: "what's next." }]
 
 export async function generateMetadata(): Promise<Metadata> {
   const [page, settings] = await Promise.all([getOptionalPageByPathname(PATHNAME), getSiteSettings()])
@@ -78,12 +85,19 @@ export default async function InsightsIndexPage() {
             template={page.template ?? null}
           />
         ) : (
-          /* Only until an editor creates the page — never a second place to edit this copy. */
-          <header className="sdl-insights-hero">
-            <div className="sdl-section-inner">
-              <h1>{FALLBACK_TITLE}</h1>
-              <p>{FALLBACK_INTRO}</p>
+          /* Only until an editor creates the page — never a second place to edit this copy.
+             Same `.sdl-hero` grid, kicker and heading structure RenderBlocks gives every other
+             inner page's hero block (EVOQ's is the direct reference), so this reads as one more
+             page in the set rather than a placeholder. */
+          <header className="sdl-hero sdl-insights-hero">
+            <div className="sdl-hero-copy-wrap">
+              <div className="sdl-kicker-wrap">
+                <Kicker>{FALLBACK_TITLE}</Kicker>
+              </div>
+              <AccentLines lines={FALLBACK_HEADING_LINES} as="h1" className="sdl-hero-copy" />
+              <p className="sdl-hero-sub">{FALLBACK_INTRO}</p>
             </div>
+            <HeroVisual visualKey="insights-feed" />
           </header>
         )}
 

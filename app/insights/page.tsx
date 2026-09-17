@@ -5,7 +5,7 @@ import { SiteHeader } from '@/components/chrome/site-header'
 import { SiteFooter } from '@/components/chrome/site-footer'
 import { InsightsExplorer } from '@/components/insights/insights-explorer'
 import {
-  getAllInsights, getFooter, getHeader, getPageByPathname, getProducts, getServices,
+  getAllInsights, getFooter, getHeader, getOptionalPageByPathname, getProducts, getServices,
   getSiteSettings,
 } from '@/lib/cms/queries'
 import { resolveBlockData } from '@/lib/cms/resolvers'
@@ -38,7 +38,7 @@ const FALLBACK_INTRO =
   'Explore our collection of blogs, case studies, and whitepapers for valuable insights into the world of IT and digital transformation.'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [page, settings] = await Promise.all([getPageByPathname(PATHNAME), getSiteSettings()])
+  const [page, settings] = await Promise.all([getOptionalPageByPathname(PATHNAME), getSiteSettings()])
 
   return buildMetadata({
     page: page ?? { title: FALLBACK_TITLE, excerpt: FALLBACK_INTRO, seo: null },
@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function InsightsIndexPage() {
   const [page, header, footer, insights, services, products] = await Promise.all([
-    getPageByPathname(PATHNAME),
+    getOptionalPageByPathname(PATHNAME),
     getHeader(),
     getFooter(),
     getAllInsights(),

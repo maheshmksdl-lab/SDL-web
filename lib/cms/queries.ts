@@ -39,6 +39,31 @@ export const getPageByPathname = cache(async (pathname: string): Promise<Page | 
   return result.docs[0] ?? null
 })
 
+/**
+ * The same lookup, for a route where the page document is OPTIONAL.
+ *
+ * `getPageByPathname` deliberately has no fallback: on a page route, a CMS outage must fail
+ * loudly rather than render a blank page as though the content had been deleted. That is right
+ * there and wrong for /insights, where the CMS page only supplies the hero above a listing that
+ * stands on its own — the route already renders a fallback header when no page exists.
+ *
+ * Without this, an unreachable CMS took the whole build down: `Export encountered an error on
+ * /insights/page`, killing every other page with it, on a route designed to work without that
+ * document.
+ */
+export const getOptionalPageByPathname = cache(async (pathname: string): Promise<Page | null> => {
+  try {
+    return await getPageByPathname(pathname)
+  } catch (error) {
+    console.warn(
+      `[cms] optional page ${pathname} could not be loaded (${
+        error instanceof Error ? error.message : String(error)
+      }) — rendering without it`,
+    )
+    return null
+  }
+})
+
 /** Pathnames for generateStaticParams. Published only — drafts are not pre-rendered. */
 export async function getAllPagePathnames(): Promise<string[]> {
   const result = await cmsFetch<Paginated<Pick<Page, 'pathname'>>>(

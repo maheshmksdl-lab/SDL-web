@@ -40,6 +40,28 @@ function isRetriable(error: unknown): boolean {
   return code === 'ECONNRESET' || code === 'ETIMEDOUT'
 }
 
+/**
+ * HTTP statuses worth trying again.
+ *
+ * A 5xx or a 429 says the CMS is briefly unwell, not that the request was wrong; a 4xx says the
+ * document is not there and will not be there on a second ask.
+ *
+ * This distinction was missing and it took the production site down. The web build fetches every
+ * page from the CMS, a deploy had just put the CMS through a cold start, and ONE request came
+ * back 500:
+ *
+ *     Error occurred prerendering page "/services/ai-transformation" — CMS responded 500
+ *     Export encountered an error on /[[...slug]]/page, exiting the build.
+ *
+ * The whole production build died and the live site silently kept serving the previous one, so
+ * /insights 404'd while every check against the CMS passed. The retry loop below existed but
+ * never covered this: the CmsError for a non-ok response is thrown inside the try and then
+ * matched by `error instanceof CmsError`, which broke out on the first attempt.
+ */
+function isRetriableStatus(status?: number): boolean {
+  return status !== undefined && (status >= 500 || status === 429)
+}
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export class CmsError extends Error {
@@ -183,6 +205,16 @@ export async function cmsFetch<T>(path: string, options: FetchOptions<T> = {}): 
 
       if (!res.ok) {
         const error = new CmsError(`CMS responded ${res.status}`, res.status, path)
+
+        // Retried before any fallback is taken: a fallback hides a transient blip as missing
+        // content, which is how a cold CMS turns into an empty page strip on the live site.
+        if (isRetriableStatus(res.status) && attempt < maxAttempts) {
+          lastError = error
+          console.warn(`[cms] ${path} → ${res.status}, retrying (${attempt}/${maxAttempts - 1})`)
+          await delay(300 * attempt)
+          continue
+        }
+
         if (fallback !== undefined) {
           console.warn(`[cms] ${path} → ${res.status}, using fallback`)
           return fallback

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -74,11 +74,38 @@ export function InsightsExplorer({
   const [sort, setSort] = useState<SortKey>('newest')
   const [visible, setVisible] = useState(PAGE_SIZE)
   const [selected, setSelected] = useState<Selection>({ kind: [], service: [], product: [] })
+
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     kind: true,
     service: true,
     product: true,
   })
+
+  /*
+   * Deep links: /insights?type=case-study, ?q=cloud, ?tag=AI transformation.
+   *
+   * This is what lets the header's "Case studies" nav item mean something, and what makes the
+   * tag chips on an article lead somewhere.
+   *
+   * Read from window.location rather than `useSearchParams`, deliberately: that hook opts the
+   * whole route out of static rendering unless it is wrapped in Suspense, and this page is
+   * prerendered. The parameters only refine an already-complete list, so applying them a frame
+   * after mount costs nothing — the full set renders first either way.
+   */
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const types = (params.get('type') ?? '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter((value) => CONTENT_TYPES.some((type) => type.value === value))
+
+    // A tag is not a facet — it is a label on the article — so it seeds the search box, which
+    // already matches against tags.
+    const term = params.get('q') ?? params.get('tag') ?? ''
+
+    if (types.length) setSelected((current) => ({ ...current, kind: types }))
+    if (term) setSearch(term)
+  }, [])
 
   // Indexed once so neither filtering nor counting re-walks the relationship arrays.
   const indexed = useMemo(

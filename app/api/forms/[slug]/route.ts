@@ -1,6 +1,10 @@
 import { createHash } from 'node:crypto'
 
 import { getForm } from '@/lib/cms/queries'
+import { summariseErrors, validateSubmission } from '@/lib/forms'
+
+/** Must match FORM_SECRET_HEADER in cms/src/access/rbac.ts. */
+const FORM_SECRET_HEADER = 'x-sdl-form-secret'
 
 /**
  * Form submission.
@@ -91,33 +95,18 @@ export async function POST(request: Request, context: RouteContext<'/api/forms/[
     return Response.json({ error: 'Unknown form.' }, { status: 404 })
   }
 
-  // Validate against the CMS definition — the client's field list is not trusted.
+  // Validate against the CMS definition — the client's field list is not trusted. The rules are
+  // the same module the browser runs (lib/forms.ts), so the two can never disagree.
   const declared = form.fields ?? []
-  const submissionData: Record<string, string> = {}
-  const missing: string[] = []
+  const { data: submissionData, errors: fieldErrors } = validateSubmission(declared, submitted)
 
-  for (const field of declared) {
-    const raw = submitted[field.name]
-    const value = typeof raw === 'string' ? raw.trim() : ''
-
-    if (field.required && !value) {
-      missing.push(field.label ?? field.name)
-      continue
-    }
-    if (!value) continue
-
-    if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      return Response.json({ error: `${field.label} does not look like an email address.` }, { status: 400 })
-    }
-    if (field.type === 'select' && field.options?.length && !field.options.includes(value)) {
-      return Response.json({ error: `${field.label} is not one of the available options.` }, { status: 400 })
-    }
-    // A generous cap: long enough for a real enquiry, short enough to stop abuse.
-    submissionData[field.name] = value.slice(0, 5000)
-  }
-
-  if (missing.length) {
-    return Response.json({ error: `Please complete: ${missing.join(', ')}.` }, { status: 400 })
+  if (Object.keys(fieldErrors).length) {
+    // `error` is the one-line summary the older card form shows; `fieldErrors` lets a form put
+    // each message beside its own field.
+    return Response.json(
+      { error: summariseErrors(declared, fieldErrors), fieldErrors },
+      { status: 400 },
+    )
   }
 
   const score = await verifyRecaptcha(payload.recaptchaToken)
@@ -129,7 +118,12 @@ export async function POST(request: Request, context: RouteContext<'/api/forms/[
 
   const response = await fetch(`${CMS_URL}/api/leads`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: {
+      'content-type': 'application/json',
+      // The CMS only accepts an anonymous lead that carries this, so the checks above cannot be
+      // skipped by posting to it directly. Server-side only: it never reaches the browser.
+      [FORM_SECRET_HEADER]: process.env.REVALIDATE_SECRET ?? '',
+    },
     body: JSON.stringify({
       form: form.id,
       status: 'new',

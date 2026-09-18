@@ -964,6 +964,66 @@ export interface Page {
             blockType: 'contact-form';
           }
         | {
+            heading: string;
+            /**
+             * H1 when this section opens the page, as it does on Contact Us.
+             */
+            headingLevel?: ('h1' | 'h2') | null;
+            /**
+             * Line breaks are kept, so each line can be its own sentence.
+             */
+            sub?: string | null;
+            /**
+             * One entry per location, shown in this order with a rule between.
+             */
+            offices?:
+              | {
+                  /**
+                   * e.g. "India". Displayed in capitals.
+                   */
+                  region: string;
+                  addressLabel?: string | null;
+                  address?: string | null;
+                  email?: string | null;
+                  /**
+                   * Shown as typed, e.g. "+91-9900931624"; dialled without the dashes.
+                   */
+                  phone?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * The line beside the arrow, above the form.
+             */
+            intro?: string | null;
+            /**
+             * Fields, labels, submit text and the success message all come from this form. Submissions appear under Leads.
+             */
+            form: number | Form;
+            /**
+             * Applies to this section only.
+             */
+            settings?: {
+              /**
+               * Lets links jump here, e.g. "capabilities" → /services#capabilities.
+               */
+              anchorId?: string | null;
+              /**
+               * Keeps the section and its content, but stops it rendering publicly.
+               */
+              hidden?: boolean | null;
+              background?: ('default' | 'white' | 'alt' | 'dark') | null;
+              spacing?: ('default' | 'tight' | 'flush') | null;
+              /**
+               * Uses the design’s scroll-reveal. Always disabled for visitors who prefer reduced motion.
+               */
+              reveal?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contact-offices';
+          }
+        | {
             kicker?: string | null;
             /**
              * The larger opening paragraph.
@@ -4106,6 +4166,36 @@ export interface PagesSelect<T extends boolean = true> {
                           newTab?: T;
                         };
                   };
+              form?: T;
+              settings?:
+                | T
+                | {
+                    anchorId?: T;
+                    hidden?: T;
+                    background?: T;
+                    spacing?: T;
+                    reveal?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'contact-offices'?:
+          | T
+          | {
+              heading?: T;
+              headingLevel?: T;
+              sub?: T;
+              offices?:
+                | T
+                | {
+                    region?: T;
+                    addressLabel?: T;
+                    address?: T;
+                    email?: T;
+                    phone?: T;
+                    id?: T;
+                  };
+              intro?: T;
               form?: T;
               settings?:
                 | T

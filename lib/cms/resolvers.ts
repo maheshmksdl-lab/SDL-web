@@ -69,6 +69,12 @@ const blockResolvers: Partial<Record<string, Resolver>> = {
     const id = idOf(field(block, 'form'))
     return id ? { formDefinition: await getForm(id) } : {}
   },
+
+  // The Contact Us page's section renders the same Form record, on its own panel.
+  'contact-offices': async (block) => {
+    const id = idOf(field(block, 'form'))
+    return id ? { formDefinition: await getForm(id) } : {}
+  },
 }
 
 /**

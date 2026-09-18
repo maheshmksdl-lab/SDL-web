@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from 'react'
 
 import type { Form } from '@/lib/payload-types'
+import { autoCompleteFor } from '@/lib/forms'
 
 /**
  * The contact form.
@@ -190,13 +191,4 @@ export function ContactFormFields({ form }: { form: Form }) {
       </div>
     </>
   )
-}
-
-/** Browser autofill hints. The design sets these; they materially help on mobile. */
-function autoCompleteFor(type: string | null | undefined, name: string): string | undefined {
-  if (type === 'email') return 'email'
-  if (type === 'tel') return 'tel'
-  if (/company|organisation|organization/i.test(name)) return 'organization'
-  if (/name/i.test(name)) return 'name'
-  return undefined
 }

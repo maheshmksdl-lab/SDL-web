@@ -1,8 +1,8 @@
-/* The /insights index — hero, facet sidebar and card grid.
+/* The /insights index — hero, facet sidebar, card grid and pager.
  *
  * A collection-detail route's stylesheet, not a page-builder section's, so it sits beside
- * article.css in the import chain. Everything is scoped under .sdl-insights-* and the page
- * accent is the SDL blue token, never a literal.
+ * article.css in the import chain. Everything is scoped under .sdl-insights-* (the cards reuse
+ * the homepage carousel's .sdl-insight-card), and the page accent is the SDL blue token.
  */
 
 /* ── Fallback hero (only when no /insights page exists in the CMS) ──────────
@@ -242,17 +242,23 @@
   }
 }
 
-/* ── Layout ───────────────────────────────────────────────────────────────── */
+/* ── Layout ─────────────────────────────────────────────────────────────────
+ *
+ * The reference blog index: a left rail of flat grey panels (search and the facets) beside a
+ * three-across card grid and a numbered pager. Panels are separated by space and a tint, never
+ * by a border or a shadow. The tint is the site's own light surface (#F6F8FC, the header and
+ * hero background), so the rail reads as part of the page rather than a set of floating boxes.
+ */
 
 .sdl-insights-section {
-  padding-block: clamp(2.5rem, 5vw, 4rem);
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
 }
 
 .sdl-insights-index {
   display: grid;
-  grid-template-columns: minmax(230px, 275px) minmax(0, 1fr);
+  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
   align-items: start;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  gap: clamp(1.75rem, 3vw, 2.5rem);
 }
 
 @media (max-width: 900px) {
@@ -265,16 +271,7 @@
 
 .sdl-insights-sidebar {
   display: grid;
-  gap: 1rem;
-  /* Follows the reader down a long result list; released on narrow screens where it stacks. */
-  position: sticky;
-  top: 1.5rem;
-}
-
-@media (max-width: 900px) {
-  .sdl-insights-sidebar {
-    position: static;
-  }
+  gap: 24px;
 }
 
 .sdl-insights-search {
@@ -283,158 +280,130 @@
   align-items: center;
 }
 
-.sdl-insights-search svg {
-  position: absolute;
-  left: 0.85rem;
-  width: 1.05rem;
-  height: 1.05rem;
-  fill: none;
-  stroke: #9aa4ae;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  pointer-events: none;
-}
-
 .sdl-insights-search input {
   width: 100%;
-  border: 1px solid #e3e7ec;
-  border-radius: 10px;
-  padding: 0.78rem 0.9rem 0.78rem 2.5rem;
-  background: #fff;
+  height: 54px;
+  border: 0;
+  border-radius: 4px;
+  padding: 0 52px 0 22px;
+  background: #f6f8fc;
   color: var(--heading);
   font: inherit;
-  font-size: 0.93rem;
+  font-size: 14.5px;
+  font-weight: 500;
 }
 
 .sdl-insights-search input::placeholder {
-  color: #9aa4ae;
+  color: #5c6873;
 }
 
 .sdl-insights-search input:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 1px;
-  border-color: transparent;
+  outline-offset: 0;
 }
 
-.sdl-insights-filters {
-  border: 1px solid #e8ebef;
-  border-radius: 14px;
-  padding: 1.15rem 1.1rem 1.4rem;
-  background: #fff;
-  box-shadow: 0 10px 30px rgba(22, 40, 51, 0.05);
+.sdl-insights-search svg {
+  position: absolute;
+  right: 20px;
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: var(--heading);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  pointer-events: none;
 }
 
-.sdl-insights-filters__head {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 1.1rem;
+.sdl-insights-panel {
+  border-radius: 4px;
+  padding: 30px 26px 24px;
+  background: #f6f8fc;
 }
 
-.sdl-insights-filters__head h2 {
-  margin: 0;
+.sdl-insights-panel__title {
+  margin: 0 0 12px;
   color: var(--heading);
-  font-size: 1.05rem;
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 19px;
   font-weight: 700;
+  line-height: 1.3;
 }
 
-.sdl-insights-filters__icon {
-  display: inline-flex;
-  width: 1.9rem;
-  height: 1.9rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--accent) 12%, #fff);
-}
-
-.sdl-insights-filters__icon svg {
-  width: 1rem;
-  height: 1rem;
-  fill: var(--accent);
-}
-
-.sdl-insights-filters__clear {
-  margin-left: auto;
-  border: 0;
-  background: none;
-  color: var(--accent);
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.sdl-insights-filters__clear:hover {
-  text-decoration: underline;
-}
-
-.sdl-insights-group + .sdl-insights-group {
-  margin-top: 0.4rem;
-  border-top: 1px solid #eef1f4;
-  padding-top: 0.4rem;
-}
-
-.sdl-insights-group__toggle {
+.sdl-insights-panel__toggle {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 12px;
   border: 0;
-  padding: 0.65rem 0;
+  padding: 0;
   background: none;
-  color: var(--heading);
+  color: inherit;
   font: inherit;
-  font-size: 0.92rem;
-  font-weight: 700;
   text-align: left;
   cursor: pointer;
 }
 
-.sdl-insights-group__toggle svg {
-  width: 0.95rem;
-  height: 0.95rem;
+.sdl-insights-panel__toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.sdl-insights-panel__toggle svg {
+  width: 14px;
+  height: 14px;
   flex: 0 0 auto;
   fill: none;
-  stroke: #8d98a3;
+  stroke: #8891a0;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: transform 160ms ease;
 }
 
-.sdl-insights-group__toggle svg[data-open='false'] {
+.sdl-insights-panel__toggle svg[data-open='false'] {
   transform: rotate(180deg);
 }
 
-.sdl-insights-group__list {
-  display: grid;
-  gap: 0.15rem;
-  margin: 0 0 0.5rem;
+/* A collapsed panel is its title alone, so the space reserved for the list goes too. */
+.sdl-insights-panel__title:has([aria-expanded='false']) {
+  margin-bottom: 6px;
+}
+
+.sdl-insights-panel__list {
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* The reference's hairline between entries — between them only, never under the last. */
+.sdl-insights-panel__list li + li {
+  border-top: 1px solid rgba(22, 40, 51, 0.1);
+}
+
 .sdl-insights-option {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  border-radius: 7px;
-  padding: 0.42rem 0.4rem;
-  color: var(--body-text);
-  font-size: 0.88rem;
+  gap: 12px;
+  padding: 12px 0;
+  color: var(--heading);
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.4;
   cursor: pointer;
+  transition: color 140ms ease;
 }
 
 .sdl-insights-option:hover {
-  background: #f6f8fb;
+  color: var(--accent);
 }
 
 /* Empty facets stay legible but recede — present, not advertised. */
 .sdl-insights-option[data-empty='true'] .sdl-insights-option__label,
 .sdl-insights-option[data-empty='true'] .sdl-insights-option__count {
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 /* The native box is replaced by the drawn one, but stays focusable and announced. */
@@ -448,13 +417,17 @@
 
 .sdl-insights-option__box {
   position: relative;
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 16px;
+  height: 16px;
   flex: 0 0 auto;
-  border: 1.5px solid #cdd4dc;
-  border-radius: 4px;
+  border: 1.5px solid #c3cbd4;
+  border-radius: 3px;
   background: #fff;
   transition: background 140ms ease, border-color 140ms ease;
+}
+
+.sdl-insights-option:hover .sdl-insights-option__box {
+  border-color: var(--accent);
 }
 
 .sdl-insights-option input:checked + .sdl-insights-option__box {
@@ -465,10 +438,10 @@
 .sdl-insights-option input:checked + .sdl-insights-option__box::after {
   content: '';
   position: absolute;
-  top: 0.12rem;
-  left: 0.3rem;
-  width: 0.28rem;
-  height: 0.55rem;
+  top: 1px;
+  left: 4.5px;
+  width: 4px;
+  height: 8px;
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -484,45 +457,223 @@
 }
 
 .sdl-insights-option__count {
-  color: #8d98a3;
-  font-size: 0.82rem;
+  color: #8891a0;
+  font-size: 12.5px;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
+}
+
+/* ── Used only by the article rail (app/insights/[slug]) ─────────────────────
+ *
+ * The article page reuses the panels and the search box above. What follows is the part only it
+ * needs: plain link rows, a search box that submits into the index, the numbered related list,
+ * and the tag pills.
+ */
+
+.sdl-insights-panel__link {
+  display: block;
+  padding: 12px 0;
+  color: var(--heading);
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.sdl-insights-panel__link:hover,
+.sdl-insights-panel__link[aria-current='true'] {
+  color: var(--accent);
+}
+
+/* The reference post page sets its search box on white with a rule, not on the grey tint. */
+.sdl-insights-search--outline input {
+  border: 1px solid rgba(22, 40, 51, 0.45);
+  background: #fff;
+}
+
+.sdl-insights-search button {
+  position: absolute;
+  right: 8px;
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 4px;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.sdl-insights-search button svg {
+  position: static;
+}
+
+.sdl-insights-search button:hover svg {
+  stroke: var(--accent);
+}
+
+.sdl-insights-search button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+
+/* The reference's numbered "Top Posts" list, used for the article's Related Blogs. */
+
+.sdl-insights-recent {
+  display: grid;
+  gap: 22px;
+  margin: 18px 0 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.sdl-insights-recent li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.sdl-insights-recent__num {
+  color: var(--heading);
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sdl-insights-recent__body {
+  display: grid;
+  gap: 7px;
+}
+
+.sdl-insights-recent__body a {
+  color: var(--heading);
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.sdl-insights-recent__body a:hover {
+  color: var(--accent);
+}
+
+.sdl-insights-recent__meta {
+  color: #8891a0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Tag pills, as the reference post sets them: soft rounded chips in small body text. On the
+   grey panel they sit on white, so the chip keeps its edge without needing a border. */
+.sdl-insights-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.sdl-insights-tags a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: #fff;
+  color: var(--body-text);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.sdl-insights-tags a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.sdl-insights-tags a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ── Results ──────────────────────────────────────────────────────────────── */
 
-.sdl-insights-results__head {
+.sdl-insights-results {
+  /* Clears the sticky 88px site header when the pager scrolls back to the top of the grid. */
+  scroll-margin-top: 112px;
+}
+
+.sdl-insights-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.35rem;
+  gap: 12px 20px;
+  margin-bottom: 24px;
 }
 
-.sdl-insights-results__title {
+.sdl-insights-toolbar__count {
   margin: 0;
+  color: #8891a0;
+  font-size: 14px;
+}
+
+.sdl-insights-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.sdl-insights-toolbar__clear {
+  border: 0;
+  padding: 0;
+  background: none;
   color: var(--accent);
-  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
-  font-weight: 700;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sdl-insights-toolbar__clear:hover {
+  text-decoration: underline;
+}
+
+.sdl-insights-toolbar__clear:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .sdl-insights-sort {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 10px;
   color: var(--body-text);
-  font-size: 0.88rem;
+  font-size: 14px;
 }
 
 .sdl-insights-sort select {
-  border: 1px solid #e3e7ec;
-  border-radius: 8px;
-  padding: 0.45rem 0.6rem;
-  background: #fff;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 12px;
+  background: #f6f8fc;
   color: var(--heading);
   font: inherit;
-  font-size: 0.88rem;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -533,191 +684,161 @@
 
 .sdl-insights-empty {
   margin: 0;
-  border: 1px dashed #dfe4ea;
-  border-radius: 12px;
-  padding: 2.5rem 1.5rem;
+  border-radius: 4px;
+  padding: 56px 24px;
+  background: #f6f8fc;
   color: var(--body-text);
   text-align: center;
 }
 
+/* Three across. The column count follows the results column's own width rather than the
+   viewport's, because that width jumps when the sidebar stacks at 900px: a tablet with the rail
+   beside the grid has less room than a phone-sized window without it. */
+.sdl-insights-results {
+  container-type: inline-size;
+}
+
 .sdl-insights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-  gap: 1.35rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* ── Card ─────────────────────────────────────────────────────────────────── */
-
-.sdl-insights-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid #edf0f3;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 10px 28px rgba(22, 40, 51, 0.06);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+@container (max-width: 830px) {
+  .sdl-insights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.sdl-insights-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 38px rgba(22, 40, 51, 0.1);
+@container (max-width: 460px) {
+  .sdl-insights-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.sdl-insights-card__media {
-  display: block;
-  /* `flex: 0 0 auto` is load-bearing: the card is a column flex container, and without it the
-     media is a shrinkable item whose aspect-ratio loses to the body's content height. */
-  flex: 0 0 auto;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: #f2f5f8;
-}
+/* ── Card ─────────────────────────────────────────────────────────────────
+ *
+ * The card itself is `.sdl-insight-card` from insights-carousel.css — the homepage "Think ahead"
+ * carousel's, verbatim. What follows only adapts it from a scrolling track to a grid cell and
+ * adds the pieces the index needs; it restyles nothing the homepage shows.
+ */
 
-.sdl-insights-card__media img {
-  display: block;
-  width: 100%;
+.sdl-insights-grid .sdl-insight-card {
   height: 100%;
+  min-height: 300px;
+}
+
+.sdl-insights-grid .sdl-insight-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Sits beneath the carousel's own gradient (::before, z-index 1) and content (z-index 2). */
+.sdl-insights-card__image {
   object-fit: cover;
 }
 
-/* No thumbnail: the design's solid swatch, cycled per article. */
-.sdl-insights-card__swatch {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--accent);
+/* The carousel's title is a <div>; here it is a real heading, so drop the browser's margins. */
+.sdl-insights-grid .sdl-insight-title {
+  margin: 0;
 }
 
-.sdl-insights-card__swatch[data-swatch='success'] {
-  background: var(--success);
+.sdl-insights-grid .sdl-insight-title:hover {
+  opacity:.8;
 }
 
-.sdl-insights-card__swatch[data-swatch='attention'] {
-  background: var(--attention);
+/* Three-up, a card is about 270px against the carousel's 380, so the parts that were sized for
+   the wider card are scaled to keep the same balance: the title steps down from 22px so it holds
+   to three lines, and a long category badge gives way before it can touch the arrow. */
+.sdl-insights-grid .sdl-insight-top-row {
+  gap: 10px;
 }
 
-.sdl-insights-card__body {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding: 1rem 1.05rem 1.15rem;
+.sdl-insights-grid .sdl-insight-thumb-badge {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.sdl-insights-card__meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
+@container (min-width: 831px) {
+  .sdl-insights-grid .sdl-insight-title {
+    font-size: 19px;
+  }
 
-.sdl-insights-card__badge {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  padding: 0.28rem 0.7rem;
-  background: color-mix(in srgb, var(--accent) 12%, #fff);
-  color: var(--accent);
-  font-size: 0.74rem;
-  font-weight: 700;
+  .sdl-insights-grid .sdl-insight-thumb-badge {
+    font-size: 10px;
+    letter-spacing: 0.03em;
+  }
 }
 
 .sdl-insights-card__time {
   display: inline-flex;
   align-items: center;
-  gap: 0.32rem;
-  color: #8d98a3;
-  font-size: 0.76rem;
+  gap: 6px;
 }
 
 .sdl-insights-card__time svg {
-  width: 0.86rem;
-  height: 0.86rem;
+  width: 13px;
+  height: 13px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;
   stroke-linecap: round;
 }
 
-.sdl-insights-card__title {
+/* ── Pager ────────────────────────────────────────────────────────────────── */
+
+.sdl-insights-pager {
+  margin-top: 48px;
+}
+
+.sdl-insights-pager ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.38;
-  font-weight: 700;
+  padding: 0;
+  list-style: none;
 }
 
-.sdl-insights-card__title a {
+.sdl-insights-pager button {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 4px;
+  background: #f6f8fc;
   color: var(--heading);
-  text-decoration: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
 }
 
-.sdl-insights-card__title a:hover {
+.sdl-insights-pager button:hover {
+  background: color-mix(in srgb, var(--accent) 12%, #fff);
   color: var(--accent);
 }
 
-.sdl-insights-card__excerpt {
-  /* Clamped so a long excerpt cannot make one card tower over its neighbours. */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  margin: 0;
-  color: var(--body-text);
-  font-size: 0.87rem;
-  line-height: 1.55;
-}
-
-.sdl-insights-card__cta {
-  display: block;
-  margin-top: auto;
-  border: 1px solid #dde3ea;
-  border-radius: 8px;
-  padding: 0.55rem 1rem;
-  color: var(--heading);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
-}
-
-.sdl-insights-card__cta:hover {
-  border-color: var(--accent);
+.sdl-insights-pager button[aria-current='page'] {
   background: var(--accent);
   color: #fff;
 }
 
-/* ── Pager ────────────────────────────────────────────────────────────────── */
-
-.sdl-insights-more {
-  display: flex;
-  justify-content: center;
-  margin-top: 2.25rem;
-}
-
-.sdl-insights-more button {
-  border: 0;
-  border-radius: 9px;
-  padding: 0.8rem 1.6rem;
-  background: var(--accent);
-  color: #fff;
-  font: inherit;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 150ms ease;
-}
-
-.sdl-insights-more button:hover {
-  background: var(--accent-hover);
-}
-
-.sdl-insights-more button:focus-visible {
+.sdl-insights-pager button:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
+}
+
+.sdl-insights-pager__gap {
+  color: #8891a0;
+  font-weight: 700;
 }

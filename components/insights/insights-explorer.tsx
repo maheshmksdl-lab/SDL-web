@@ -1,19 +1,24 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import type { Insight, Product, Service } from '@/lib/payload-types'
 import { resolveMedia } from '@/lib/links'
+import { insightColors } from '@/lib/registries/swatches'
+import { CONTENT_TYPES, categoryLabel, labelForKind } from '@/lib/insights'
 
 /**
- * The /insights index: search, three facet groups, sort, and a Load More pager.
+ * The /insights index: search, three facet groups, sort, and a numbered pager.
  *
  * Filtering runs in the browser over the full published set (see `getAllInsights`). The reason
  * is the design itself: it puts a COUNT beside every facet, and counts that stay honest while
  * you tick boxes are a per-facet aggregation. Doing that server-side is one query per facet on
  * every click; doing it here is one pass over an array the page has already loaded.
+ *
+ * The cards are the homepage "Think ahead" carousel's (`.sdl-insight-card`, styled verbatim in
+ * insights-carousel.css) laid into a grid, so an article looks the same wherever it is listed.
  */
 
 type FacetOption = { value: string; label: string; count: number }
@@ -21,21 +26,14 @@ type GroupKey = 'kind' | 'service' | 'product'
 type Selection = Record<GroupKey, string[]>
 type SortKey = 'newest' | 'oldest' | 'az'
 
-/** The four content types, and the only place their labels are spelled for the visitor. */
-const CONTENT_TYPES: { value: string; label: string }[] = [
-  { value: 'blog', label: 'Blog' },
-  { value: 'case-study', label: 'Case Studies' },
-  { value: 'whitepaper', label: 'White Papers' },
-  { value: 'featured-project', label: 'Featured Projects' },
-]
-
 const SORTS: { value: SortKey; label: string }[] = [
   { value: 'newest', label: 'Newest' },
   { value: 'oldest', label: 'Oldest' },
   { value: 'az', label: 'A–Z' },
 ]
 
-const PAGE_SIZE = 9
+// Four rows of the three-across grid; the pager takes over after that.
+const PAGE_SIZE = 12
 
 /** A relationship arrives as an id or the resolved document, depending on depth. */
 function relIds(value: unknown): string[] {
@@ -48,17 +46,22 @@ function relIds(value: unknown): string[] {
     .map(String)
 }
 
-function labelForKind(kind?: string | null): string {
-  return CONTENT_TYPES.find((type) => type.value === kind)?.label ?? 'Blog'
-}
-
 function haystack(insight: Insight): string {
-  const category =
-    typeof insight.category === 'object' && insight.category ? insight.category.label : ''
-  return [insight.title, insight.excerpt, category, ...(insight.tags ?? [])]
+  return [insight.title, insight.excerpt, categoryLabel(insight), ...(insight.tags ?? [])]
     .filter(Boolean)
     .join(' ')
     .toLowerCase()
+}
+
+const publishedTime = (insight: Insight) =>
+  insight.publishedAt ? new Date(insight.publishedAt).getTime() : 0
+
+/** Page numbers to show, with `null` standing for a gap: 1 … 4 5 6 … 12. */
+function pageList(current: number, count: number): (number | null)[] {
+  if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1)
+  const pages = new Set([1, count, current - 1, current, current + 1])
+  const sorted = [...pages].filter((n) => n >= 1 && n <= count).sort((a, b) => a - b)
+  return sorted.flatMap((n, i) => (i > 0 && n - sorted[i - 1]! > 1 ? [null, n] : [n]))
 }
 
 export function InsightsExplorer({
@@ -72,8 +75,9 @@ export function InsightsExplorer({
 }) {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<SortKey>('newest')
-  const [visible, setVisible] = useState(PAGE_SIZE)
+  const [page, setPage] = useState(1)
   const [selected, setSelected] = useState<Selection>({ kind: [], service: [], product: [] })
+  const resultsRef = useRef<HTMLDivElement>(null)
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     kind: true,
@@ -85,7 +89,7 @@ export function InsightsExplorer({
    * Deep links: /insights?type=case-study, ?q=cloud, ?tag=AI transformation.
    *
    * This is what lets the header's "Case studies" nav item mean something, and what makes the
-   * tag chips on an article lead somewhere.
+   * tag chips and search box on an article lead somewhere.
    *
    * Read from window.location rather than `useSearchParams`, deliberately: that hook opts the
    * whole route out of static rendering unless it is wrapped in Suspense, and this page is
@@ -105,6 +109,15 @@ export function InsightsExplorer({
 
     if (types.length) setSelected((current) => ({ ...current, kind: types }))
     if (term) setSearch(term)
+  }, [])
+
+  // Stacked above the results on a narrow screen, the two long facet lists would push the first
+  // card a screen and a half down, so there they start closed. Server HTML is always the open,
+  // desktop rendering; this only folds it after mount.
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      setOpenGroups((current) => ({ ...current, service: false, product: false }))
+    }
   }, [])
 
   // Indexed once so neither filtering nor counting re-walks the relationship arrays.
@@ -194,15 +207,32 @@ export function InsightsExplorer({
     },
   ]
 
+  /*
+   * Sorted, then given the homepage carousel's fallback swatch: cards WITHOUT a thumbnail cycle
+   * through `insightColors`, and the counter advances only on those — the same rule the
+   * carousel applies, so a swatch card reads the same here as it does on the homepage.
+   */
   const sorted = useMemo(() => {
     const rows = [...matching]
-    const time = (insight: Insight) =>
-      insight.publishedAt ? new Date(insight.publishedAt).getTime() : 0
     if (sort === 'az') rows.sort((a, b) => a.insight.title.localeCompare(b.insight.title))
-    else if (sort === 'oldest') rows.sort((a, b) => time(a.insight) - time(b.insight))
-    else rows.sort((a, b) => time(b.insight) - time(a.insight))
-    return rows
+    else if (sort === 'oldest') rows.sort((a, b) => publishedTime(a.insight) - publishedTime(b.insight))
+    else rows.sort((a, b) => publishedTime(b.insight) - publishedTime(a.insight))
+
+    let colorIndex = 0
+    return rows.map((row) => {
+      const image =
+        resolveMedia(row.insight.thumbnail, 'insight') ?? resolveMedia(row.insight.thumbnail)
+      if (image) return { ...row, image, swatch: null }
+      const swatch = insightColors[colorIndex % insightColors.length]!
+      colorIndex += 1
+      return { ...row, image: null, swatch }
+    })
   }, [matching, sort])
+
+  // A narrower result set should start on its first page, not part-way through the old one.
+  function restart() {
+    setPage(1)
+  }
 
   function toggle(group: GroupKey, value: string) {
     setSelected((current) => {
@@ -212,65 +242,54 @@ export function InsightsExplorer({
         [group]: picks.includes(value) ? picks.filter((v) => v !== value) : [...picks, value],
       }
     })
-    // A narrower result set should start at the top, not mid-way down a previous "load more".
-    setVisible(PAGE_SIZE)
+    restart()
+  }
+
+  function goTo(next: number) {
+    setPage(next)
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    resultsRef.current?.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' })
   }
 
   const activeCount = selected.kind.length + selected.service.length + selected.product.length
-  const shown = sorted.slice(0, visible)
+  const pageCount = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE))
+  const current = Math.min(page, pageCount)
+  const first = (current - 1) * PAGE_SIZE
+  const shown = sorted.slice(first, first + PAGE_SIZE)
 
   return (
     <div className="sdl-insights-index">
       <aside className="sdl-insights-sidebar" aria-label="Filter insights">
         <div className="sdl-insights-search">
+          <input
+            type="search"
+            value={search}
+            placeholder="Search..."
+            aria-label="Search insights"
+            onChange={(event) => {
+              setSearch(event.target.value)
+              restart()
+            }}
+          />
           <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
             <circle cx="9" cy="9" r="6" />
             <line x1="13.5" y1="13.5" x2="18" y2="18" />
           </svg>
-          <input
-            type="search"
-            value={search}
-            placeholder="Search insights..."
-            aria-label="Search insights"
-            onChange={(event) => {
-              setSearch(event.target.value)
-              setVisible(PAGE_SIZE)
-            }}
-          />
         </div>
 
-        <div className="sdl-insights-filters">
-          <div className="sdl-insights-filters__head">
-            <span className="sdl-insights-filters__icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" focusable="false">
-                <path d="M2 4h16l-6 7v5l-4 2v-7z" />
-              </svg>
-            </span>
-            <h2>Filter By</h2>
-            {activeCount > 0 ? (
-              <button
-                type="button"
-                className="sdl-insights-filters__clear"
-                onClick={() => {
-                  setSelected({ kind: [], service: [], product: [] })
-                  setVisible(PAGE_SIZE)
-                }}
-              >
-                Clear
-              </button>
-            ) : null}
-          </div>
-
-          {groups.map((group) => {
-            const open = openGroups[group.key] !== false
-            return (
-              <section key={group.key} className="sdl-insights-group">
+        {groups.map((group) => {
+          const open = openGroups[group.key] !== false
+          const listId = `sdl-insights-facet-${group.key}`
+          return (
+            <section key={group.key} className="sdl-insights-panel">
+              <h2 className="sdl-insights-panel__title">
                 <button
                   type="button"
-                  className="sdl-insights-group__toggle"
+                  className="sdl-insights-panel__toggle"
                   aria-expanded={open}
+                  aria-controls={listId}
                   onClick={() =>
-                    setOpenGroups((current) => ({ ...current, [group.key]: !open }))
+                    setOpenGroups((state) => ({ ...state, [group.key]: !open }))
                   }
                 >
                   <span>{group.title}</span>
@@ -278,121 +297,185 @@ export function InsightsExplorer({
                     <path d="M3 10l5-5 5 5" />
                   </svg>
                 </button>
+              </h2>
 
-                {open ? (
-                  <ul className="sdl-insights-group__list">
-                    {group.options.map((option) => {
-                      const checked = selected[group.key].includes(option.value)
-                      return (
-                        <li key={option.value}>
-                          <label
-                            className="sdl-insights-option"
-                            /* Zero results stay visible and selectable, as the design shows —
-                               they tell the visitor the category exists but is empty. */
-                            data-empty={option.count === 0 && !checked ? 'true' : undefined}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={checked}
-                              onChange={() => toggle(group.key, option.value)}
-                            />
-                            <span className="sdl-insights-option__box" aria-hidden="true" />
-                            <span className="sdl-insights-option__label">{option.label}</span>
-                            <span className="sdl-insights-option__count">({option.count})</span>
-                          </label>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                ) : null}
-              </section>
-            )
-          })}
-        </div>
+              {open ? (
+                <ul className="sdl-insights-panel__list" id={listId}>
+                  {group.options.map((option) => {
+                    const checked = selected[group.key].includes(option.value)
+                    return (
+                      <li key={option.value}>
+                        <label
+                          className="sdl-insights-option"
+                          /* Zero results stay visible and selectable — they tell the visitor
+                             the category exists but is empty. */
+                          data-empty={option.count === 0 && !checked ? 'true' : undefined}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => toggle(group.key, option.value)}
+                          />
+                          <span className="sdl-insights-option__box" aria-hidden="true" />
+                          <span className="sdl-insights-option__label">{option.label}</span>
+                          <span className="sdl-insights-option__count">{option.count}</span>
+                        </label>
+                      </li>
+                    )
+                  })}
+                </ul>
+              ) : null}
+            </section>
+          )
+        })}
       </aside>
 
-      <div className="sdl-insights-results">
-        <div className="sdl-insights-results__head">
-          <h2 className="sdl-insights-results__title">All Insights</h2>
-          <label className="sdl-insights-sort">
-            <span>Sort by:</span>
-            <select value={sort} onChange={(event) => setSort(event.target.value as SortKey)}>
-              {SORTS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
+      <div className="sdl-insights-results" ref={resultsRef}>
+        <h2 className="sdl-visually-hidden">All insights</h2>
+
+        <div className="sdl-insights-toolbar">
+          <p className="sdl-insights-toolbar__count" role="status">
+            {sorted.length
+              ? `Showing ${first + 1}–${first + shown.length} of ${sorted.length} ${
+                  sorted.length === 1 ? 'insight' : 'insights'
+                }`
+              : 'No insights found'}
+          </p>
+          <div className="sdl-insights-toolbar__actions">
+            {activeCount > 0 ? (
+              <button
+                type="button"
+                className="sdl-insights-toolbar__clear"
+                onClick={() => {
+                  setSelected({ kind: [], service: [], product: [] })
+                  restart()
+                }}
+              >
+                Clear filters
+              </button>
+            ) : null}
+            <label className="sdl-insights-sort">
+              <span>Sort by</span>
+              <select
+                value={sort}
+                onChange={(event) => {
+                  setSort(event.target.value as SortKey)
+                  restart()
+                }}
+              >
+                {SORTS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
         </div>
 
         {shown.length === 0 ? (
-          <p className="sdl-insights-empty" role="status">
+          <p className="sdl-insights-empty">
             No insights match those filters yet. Try clearing a filter or searching for something
             broader.
           </p>
         ) : (
           <ul className="sdl-insights-grid">
-            {shown.map(({ insight }) => {
-              const image = resolveMedia(insight.thumbnail, 'insight') ?? resolveMedia(insight.thumbnail)
+            {shown.map(({ insight, image, swatch }) => {
+              const tag = categoryLabel(insight) ?? labelForKind(insight.kind)
               return (
-                <li key={insight.id} className="sdl-insights-card">
-                  <Link href={`/insights/${insight.slug}`} className="sdl-insights-card__media">
+                <li key={insight.id} className="sdl-insights-grid__item">
+                  <Link
+                    href={`/insights/${insight.slug}`}
+                    className={
+                      swatch
+                        ? `sdl-insight-card sdl-insight-card--color sdl-insight-card--${swatch.text}`
+                        : 'sdl-insight-card'
+                    }
+                    style={swatch ? { background: swatch.bg } : undefined}
+                  >
                     {image ? (
+                      /* An <Image> under the carousel's own overlay rather than its CSS
+                         background, so the grid gets responsive sizes and lazy loading. The
+                         title is the link's text, so the picture itself is decorative. */
                       <Image
+                        className="sdl-insights-card__image"
                         src={image.src}
-                        alt={image.alt || insight.title}
-                        width={image.width ?? 720}
-                        height={image.height ?? 900}
-                        sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 320px"
+                        alt=""
+                        fill
+                        sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 300px"
                       />
-                    ) : (
-                      <span
-                        className="sdl-insights-card__swatch"
-                        data-swatch={insight.swatch ?? 'accent'}
-                        aria-hidden="true"
-                      />
-                    )}
-                  </Link>
-
-                  <div className="sdl-insights-card__body">
-                    <div className="sdl-insights-card__meta">
-                      <span className="sdl-insights-card__badge">{labelForKind(insight.kind)}</span>
-                      {insight.readTime ? (
-                        <span className="sdl-insights-card__time">
-                          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                            <circle cx="8" cy="8" r="6.2" />
-                            <path d="M8 4.6V8l2.4 1.6" />
-                          </svg>
-                          {insight.readTime}
-                        </span>
-                      ) : null}
-                    </div>
-
-                    <h3 className="sdl-insights-card__title">
-                      <Link href={`/insights/${insight.slug}`}>{insight.title}</Link>
-                    </h3>
-
-                    {insight.excerpt ? (
-                      <p className="sdl-insights-card__excerpt">{insight.excerpt}</p>
                     ) : null}
 
-                    <Link href={`/insights/${insight.slug}`} className="sdl-insights-card__cta">
-                      Read More
-                    </Link>
-                  </div>
+                    <div className="sdl-insight-top-row">
+                      <span className="sdl-insight-thumb-badge">{tag}</span>
+                      <span className="sdl-insight-link-icon" aria-hidden="true">
+                        ↗
+                      </span>
+                    </div>
+
+                    <div className="sdl-insight-body">
+                      <h3 className="sdl-insight-title">{insight.title}</h3>
+                      <div className="sdl-insight-meta">
+                        {insight.readTime ? (
+                          <span className="sdl-insights-card__time">
+                            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                              <circle cx="8" cy="8" r="6.2" />
+                              <path d="M8 4.6V8l2.4 1.6" />
+                            </svg>
+                            {insight.readTime}
+                          </span>
+                        ) : (
+                          <span />
+                        )}
+                        <span className="read-link">
+                          Read More <span aria-hidden="true">↗</span>
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
                 </li>
               )
             })}
           </ul>
         )}
 
-        {sorted.length > visible ? (
-          <div className="sdl-insights-more">
-            <button type="button" onClick={() => setVisible((n) => n + PAGE_SIZE)}>
-              Load More Insights
-            </button>
-          </div>
+        {pageCount > 1 ? (
+          <nav className="sdl-insights-pager" aria-label="Insights pages">
+            <ul>
+              {current > 1 ? (
+                <li>
+                  <button type="button" aria-label="Previous page" onClick={() => goTo(current - 1)}>
+                    ‹
+                  </button>
+                </li>
+              ) : null}
+              {pageList(current, pageCount).map((n, index) =>
+                n === null ? (
+                  <li key={`gap-${index}`} className="sdl-insights-pager__gap" aria-hidden="true">
+                    …
+                  </li>
+                ) : (
+                  <li key={n}>
+                    <button
+                      type="button"
+                      aria-label={`Page ${n}`}
+                      aria-current={n === current ? 'page' : undefined}
+                      onClick={() => goTo(n)}
+                    >
+                      {n}
+                    </button>
+                  </li>
+                ),
+              )}
+              {current < pageCount ? (
+                <li>
+                  <button type="button" aria-label="Next page" onClick={() => goTo(current + 1)}>
+                    ›
+                  </button>
+                </li>
+              ) : null}
+            </ul>
+          </nav>
         ) : null}
       </div>
     </div>

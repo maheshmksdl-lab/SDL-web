@@ -62,6 +62,9 @@
 @import '../styles/sections/article.css';
 @import '../styles/sections/insights-index.css';
 
+/* Blocks built after the design extraction, with no design source to keep in step with. */
+@import '../styles/sections/contact-offices.css';
+
 @import '../styles/variants.css';
 
 /* ── Accessibility additions (sanctioned deviation #3) ──────────────────────

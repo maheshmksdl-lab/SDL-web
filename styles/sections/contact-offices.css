@@ -1,0 +1,456 @@
+/* contact-offices — the Contact Us page's section.
+ *
+ * Not part of the sdl-2.0 extraction (the design has no contact page), so this is written for
+ * the reference layout from the site's own tokens: Manrope headings, --heading / --body-text
+ * copy, and --accent as the form panel's SDL blue. Everything is scoped under .sdl-contact-page
+ * and .sdl-contact-panel, so no page-builder section can pick it up.
+ *
+ * Layout, as the reference draws it:
+ *   - two columns; the details column carries a hairline down its left edge, and the intro area
+ *     above the form is framed by hairlines on both sides
+ *   - on the right, an arrow runs from the column's edge into the introduction, and the form
+ *     sits beneath on a solid blue panel with underlined fields
+ */
+
+.sdl-contact-page {
+  --contact-rule: #e3e7ed;
+  background: #fff;
+  padding-top: clamp(48px, 6vw, 80px);
+}
+
+.sdl-contact-page__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+/* ── Details column ──────────────────────────────────────────────────────── */
+
+.sdl-contact-page__details {
+  border-left: 1px solid var(--contact-rule);
+  padding: 0 clamp(32px, 5.5vw, 72px) 24px;
+}
+
+.sdl-contact-page__title {
+  margin: 0;
+  color: var(--heading);
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: clamp(42px, 5.2vw, 68px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.sdl-contact-page__sub {
+  margin: 26px 0 0;
+  color: var(--heading);
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.75;
+  /* Editors break the line where the reference does: one sentence per line. */
+  white-space: pre-line;
+}
+
+.sdl-contact-office {
+  margin-top: 40px;
+}
+
+/* The reference's dotted rule between offices. */
+.sdl-contact-office + .sdl-contact-office {
+  margin-top: 36px;
+  border-top: 1px dotted rgba(22, 40, 51, 0.45);
+  padding-top: 34px;
+}
+
+.sdl-contact-office__region {
+  margin: 0;
+  color: var(--heading);
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sdl-contact-office__card {
+  font-style: normal;
+}
+
+.sdl-contact-office__label {
+  margin: 26px 0 0;
+  color: #6b7785;
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.sdl-contact-office__address {
+  margin: 10px 0 0;
+  color: var(--heading);
+  font-size: 15px;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.sdl-contact-office__lines {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sdl-contact-office__lines li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--heading);
+  font-size: 15px;
+}
+
+.sdl-contact-office__lines svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: var(--heading);
+}
+
+.sdl-contact-office__lines a {
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 150ms ease;
+}
+
+.sdl-contact-office__lines a:hover {
+  color: var(--accent);
+}
+
+.sdl-contact-office__lines a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Enquiry column ──────────────────────────────────────────────────────── */
+
+.sdl-contact-page__enquiry {
+  display: flex;
+  flex-direction: column;
+}
+
+.sdl-contact-page__intro {
+  display: grid;
+  grid-template-columns: minmax(64px, 26%) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 2.4vw, 30px);
+  border-right: 1px solid var(--contact-rule);
+  border-left: 1px solid var(--contact-rule);
+  padding: clamp(40px, 5vw, 64px) clamp(24px, 3.5vw, 44px) clamp(40px, 5vw, 64px) 0;
+}
+
+/* A rule with a solid head, running in from the column's own edge. */
+.sdl-contact-page__arrow {
+  position: relative;
+  height: 3px;
+  margin-right: 10px;
+  background: var(--heading);
+}
+
+.sdl-contact-page__arrow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 11px solid var(--heading);
+  transform: translateY(-50%);
+}
+
+.sdl-contact-page__intro p {
+  margin: 0;
+  color: var(--body-text);
+  font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.7;
+}
+
+.sdl-contact-page__panel {
+  flex: 1 1 auto;
+  padding: clamp(36px, 4.5vw, 64px) clamp(24px, 3vw, 36px) clamp(32px, 4vw, 48px);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── The form on the panel ───────────────────────────────────────────────── */
+
+/* Rows sit 16px apart plus each field's reserved message line below, which together give the
+   reference's spacing when nothing is wrong. */
+.sdl-contact-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.sdl-contact-panel__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 12px;
+}
+
+.sdl-contact-panel__field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sdl-contact-panel__field label {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sdl-contact-panel__field input,
+.sdl-contact-panel__field textarea,
+.sdl-contact-panel__field select {
+  width: 100%;
+  margin-top: 6px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  padding: 10px 0 9px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  caret-color: #fff;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.sdl-contact-panel__field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.sdl-contact-panel__field select option {
+  color: var(--heading);
+}
+
+.sdl-contact-panel__field input::placeholder,
+.sdl-contact-panel__field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Focus thickens the underline to white, so the active field is plain without an outline box
+   fighting the reference's open, underlined style. */
+.sdl-contact-panel__field input:focus,
+.sdl-contact-panel__field textarea:focus,
+.sdl-contact-panel__field select:focus {
+  border-bottom-color: #fff;
+  box-shadow: 0 1px 0 #fff;
+  outline: none;
+}
+
+/* Autofill paints its own pale background; keep the text white on the blue panel. */
+.sdl-contact-panel__field input:-webkit-autofill {
+  -webkit-text-fill-color: #fff;
+  box-shadow: 0 0 0 1000px var(--accent) inset;
+  transition: background-color 9999s ease-out;
+}
+
+.sdl-contact-panel__field[data-invalid='true'] input,
+.sdl-contact-panel__field[data-invalid='true'] textarea,
+.sdl-contact-panel__field[data-invalid='true'] select {
+  border-bottom-color: #ffc2b8;
+  box-shadow: 0 1px 0 #ffc2b8;
+}
+
+/* Pale coral on the blue: reads as a warning and keeps a high contrast with the panel. The
+   line is reserved even when empty, so a message appearing never moves the fields below it. */
+.sdl-contact-panel__error {
+  /* A fixed line box the same as the reserved height: a unitless line-height would compute to
+     18.85px and nudge everything below by a pixel when a message appears. */
+  min-height: 19px;
+  margin: 6px 0 0;
+  color: #ffe2dc;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.sdl-contact-panel__error:not(:empty)::before {
+  content: '!';
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #ffc2b8;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  vertical-align: 1px;
+}
+
+.sdl-contact-panel__alert {
+  margin: 0;
+  border-left: 3px solid #ffc2b8;
+  border-radius: 2px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sdl-contact-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px 24px;
+  margin-top: -4px;
+}
+
+.sdl-contact-panel__fineprint {
+  flex: 1 1 220px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sdl-contact-panel__submit {
+  border: 0;
+  border-radius: 4px;
+  padding: 14px 30px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(10, 20, 60, 0.22);
+  color: var(--heading);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.sdl-contact-panel__submit:hover:not(:disabled) {
+  background: #f6f8fc;
+  box-shadow: 0 12px 24px rgba(10, 20, 60, 0.28);
+  transform: translateY(-1px);
+}
+
+.sdl-contact-panel__submit:focus-visible,
+.sdl-contact-panel__again:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.sdl-contact-panel__submit:disabled {
+  cursor: progress;
+  opacity: 0.75;
+}
+
+/* ── Success ─────────────────────────────────────────────────────────────── */
+
+.sdl-contact-panel__success {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 12px 0;
+  outline: none;
+}
+
+.sdl-contact-panel__success-icon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.sdl-contact-panel__success-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sdl-contact-panel__success-title {
+  margin: 8px 0 0;
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sdl-contact-panel__success-body {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.sdl-contact-panel__again {
+  margin-top: 12px;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.sdl-contact-panel__status {
+  margin: 0;
+  color: #fff;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+/* Stacked: details, then the introduction and form. The framing rules belong to the side-by-side
+   layout, so they go; the arrow shortens to a lead-in. */
+@media (max-width: 1060px) {
+  .sdl-contact-page__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .sdl-contact-page__details {
+    border-left: 0;
+    padding: 0;
+  }
+
+  .sdl-contact-page__intro {
+    grid-template-columns: 72px minmax(0, 1fr);
+    border: 0;
+    padding: 0 0 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sdl-contact-panel__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sdl-contact-page__intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .sdl-contact-page__arrow {
+    width: 72px;
+  }
+
+  .sdl-contact-panel__submit {
+    width: 100%;
+  }
+}

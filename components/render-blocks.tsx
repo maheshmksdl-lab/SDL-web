@@ -13,6 +13,7 @@ import {
 import { CategoryGrid, PlatformRow } from './sections/platform-sections'
 import { InsightsCarousel } from './sections/insights-carousel'
 import { ContactForm } from './sections/contact-form'
+import { ContactOffices } from './sections/contact-offices'
 import { AiEngineering } from './sections/ai-engineering'
 import {
   EvoqArchitecture, IndustriesGrid, IntegrationsShowcase, ProductGrid, RichText, TechGroups,
@@ -56,6 +57,8 @@ const SECTION_ROOT_CLASS: Partial<Record<string, string>> = {
   // writes it. Because the string is not exactly 'sdl-section', background and spacing
   // modifiers are skipped — correct here, since .sdl-contact-section paints its own surface.
   'contact-form': 'sdl-section sdl-contact-section',
+  // The Contact Us section paints its own white surface and framing rules, as above.
+  'contact-offices': 'sdl-section sdl-contact-page',
 }
 
 /**
@@ -123,9 +126,10 @@ const sectionComponents: Partial<Record<string, SectionComponent>> = {
   proof: Proof,
   testimonials: Testimonials,
 
-  // The two client islands.
+  // The client islands.
   'insights-carousel': InsightsCarousel,
   'contact-form': ContactForm,
+  'contact-offices': ContactOffices,
 
   // EVOQ and digital-engineering.
   'tech-groups': TechGroups,

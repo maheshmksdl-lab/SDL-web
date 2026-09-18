@@ -1,0 +1,52 @@
+/* company — shared chrome for the Clients and Testimonials pages: the tab switcher and the
+   section head both grids open with. See clients-grid.css and testimonials-grid.css for the
+   grids themselves. */
+
+.sdl-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 6px;
+  background: #EEF1F6;
+  border-radius: 14px;
+}
+
+.sdl-tab {
+  flex: 1 1 0;
+  text-align: center;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #6B7684;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sdl-tab:hover { color: var(--heading); }
+
+.sdl-tab--active,
+.sdl-tab--active:hover {
+  background: #FFFFFF;
+  color: var(--heading);
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.08);
+}
+
+.sdl-company-head {
+  margin-top: 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.sdl-company-title { margin: 0; }
+
+.sdl-company-sub { margin-top: 0; max-width: 620px; }
+
+@media (max-width: 640px) {
+  .sdl-tabs { flex-direction: row; padding: 5px; }
+  .sdl-tab { padding: 12px 14px; font-size: 14px; }
+}

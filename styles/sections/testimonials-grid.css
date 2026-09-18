@@ -1,0 +1,71 @@
+/* testimonials-grid — the full testimonial wall on the Testimonials page.
+
+   Distinct from `sdl-testimonial-*` (sections/testimonials.css), which is the home page's
+   two-column "quote first" card — this page's cards lead with the headline and quote, then the
+   person, in a three-column grid, per the reference. */
+
+.sdl-testimonials-grid-page {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sdl-testimonial-grid-card {
+  background: #FFFFFF;
+  border: 1px solid #EEF1F6;
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sdl-testimonial-grid-stars { display: flex; gap: 3px; color: var(--accent); }
+
+.sdl-star { fill: none; stroke: currentColor; stroke-width: 1.6; }
+
+.sdl-star--filled { fill: currentColor; stroke: none; }
+
+.sdl-testimonial-grid-headline {
+  margin-top: 14px;
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--heading);
+}
+
+.sdl-testimonial-grid-text {
+  margin-top: 10px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--body-text);
+  flex: 1 1 auto;
+}
+
+.sdl-testimonial-grid-person {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sdl-testimonial-grid-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #EEF1F6;
+}
+
+.sdl-testimonial-grid-name { font-size: 14px; font-weight: 700; color: var(--heading); }
+
+.sdl-testimonial-grid-designation { font-size: 12.5px; color: #6B7684; margin-top: 2px; }
+
+@media (max-width: 1060px) {
+  .sdl-testimonials-grid-page { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .sdl-testimonials-grid-page { grid-template-columns: 1fr; }
+}

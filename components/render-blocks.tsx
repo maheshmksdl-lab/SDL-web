@@ -14,6 +14,7 @@ import { CategoryGrid, PlatformRow } from './sections/platform-sections'
 import { InsightsCarousel } from './sections/insights-carousel'
 import { ContactForm } from './sections/contact-form'
 import { ContactOffices } from './sections/contact-offices'
+import { ClientsGrid, PageIntro, SuccessCta, TestimonialsGrid } from './sections/company-sections'
 import { AiEngineering } from './sections/ai-engineering'
 import {
   EvoqArchitecture, IndustriesGrid, IntegrationsShowcase, ProductGrid, RichText, TechGroups,
@@ -53,6 +54,8 @@ const SECTION_ROOT_CLASS: Partial<Record<string, string>> = {
   'value-grid': 'ai-value-section',
   'cta-banner': 'ai-cta-section',
   'process-timeline': 'svc-timeline-section',
+  // A plain centered banner — its own background and padding, like `.sdl-hero`.
+  'page-intro': 'sdl-page-intro',
   // The contact section layers its own class ON TOP of .sdl-section, which is how the design
   // writes it. Because the string is not exactly 'sdl-section', background and spacing
   // modifiers are skipped — correct here, since .sdl-contact-section paints its own surface.
@@ -130,6 +133,12 @@ const sectionComponents: Partial<Record<string, SectionComponent>> = {
   'insights-carousel': InsightsCarousel,
   'contact-form': ContactForm,
   'contact-offices': ContactOffices,
+
+  // Clients & Testimonials
+  'page-intro': PageIntro,
+  'clients-grid': ClientsGrid,
+  'testimonials-grid': TestimonialsGrid,
+  'success-cta': SuccessCta,
 
   // EVOQ and digital-engineering.
   'tech-groups': TechGroups,

@@ -1,0 +1,37 @@
+/* success-cta — the light closing card: "Ready to Join Our Success Stories?".
+
+   Deliberately its own block rather than `cta-banner`: that block's card is dark and themed per
+   service page (`.ai-cta-card`, `.bt-cta-card`, …), which the reference's light card is not. */
+
+.sdl-success-cta-card {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(180deg, #EEF1FE 0%, #F6F8FC 100%);
+  border: 1px solid #E4E9F9;
+  border-radius: 24px;
+  padding: 56px 48px;
+}
+
+.sdl-success-cta-title {
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(26px, 2.8vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--heading);
+}
+
+.sdl-success-cta-sub {
+  margin: 16px auto 0;
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--body-text);
+}
+
+.sdl-success-cta-btn { margin-top: 30px; }
+
+@media (max-width: 640px) {
+  .sdl-success-cta-card { padding: 40px 24px; border-radius: 20px; }
+}

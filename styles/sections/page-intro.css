@@ -1,0 +1,30 @@
+/* page-intro — a plain centered banner for the Clients and Testimonials pages.
+
+   No hero visual, no buttons: a light tinted band with a centered heading and sub-line, matching
+   the "Our Clients & Testimonials" reference. Own background and padding, like `.sdl-hero`. */
+
+.sdl-page-intro {
+  background: #F6F8FC;
+  padding: 72px 48px;
+  text-align: center;
+}
+
+.sdl-page-intro-inner {
+  max-width: 760px;
+}
+
+.sdl-page-intro-title {
+  color: var(--heading);
+}
+
+.sdl-page-intro-sub {
+  margin: 18px auto 0;
+  max-width: 640px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--body-text);
+}
+
+@media (max-width: 1060px) {
+  .sdl-page-intro { padding: 56px 24px; }
+}

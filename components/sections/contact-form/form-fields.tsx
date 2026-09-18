@@ -18,11 +18,25 @@ import { autoCompleteFor } from '@/lib/forms'
  *   - failures surface inline and keep what the visitor typed, rather than navigating away
  *   - `aria-live` on the error and success regions, so the outcome is announced
  */
-export function ContactFormFields({ form }: { form: Form }) {
+export function ContactFormFields({
+  form,
+  showHead = true,
+}: {
+  form: Form
+  /** Off for the header's popup, which carries its own title and close button instead. */
+  showHead?: boolean
+}) {
   const formRef = useRef<HTMLFormElement>(null)
   const [state, setState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [error, setError] = useState<string | null>(null)
-  const errorId = useId()
+
+  // Prefixes every id this component renders, so two instances on one page — the home page's
+  // own contact-form block plus the header's popup, say — never collide. A collision is not
+  // cosmetic: the browser resolves a <label for> to the FIRST matching id in the document, so
+  // clicking the popup's "Name" label could silently focus the other form's field instead.
+  const uid = useId()
+  const fieldId = (name: string) => `${uid}-${name}`
+  const errorId = `${uid}-error`
 
   const fields = form.fields ?? []
 
@@ -83,10 +97,12 @@ export function ContactFormFields({ form }: { form: Form }) {
 
   return (
     <>
-      <div className="sdl-form-card-head">
-        <span>{form.cardTitle ?? form.name}</span>
-        <span id="formStepCount">01 / 01</span>
-      </div>
+      {showHead ? (
+        <div className="sdl-form-card-head">
+          <span>{form.cardTitle ?? form.name}</span>
+          <span id={fieldId('step-count')}>01 / 01</span>
+        </div>
+      ) : null}
 
       <div className="sdl-form">
         {state !== 'success' ? (
@@ -94,14 +110,14 @@ export function ContactFormFields({ form }: { form: Form }) {
             {rows.map((row, rowIndex) => {
               const inner = row.map((field) => (
                 <div className="sdl-form-row" key={field.id ?? field.name}>
-                  <label htmlFor={`cf-${field.name}`}>
+                  <label htmlFor={fieldId(field.name)}>
                     {field.label}
                     {field.required ? '*' : <span className="optional"> (optional)</span>}
                   </label>
 
                   {field.type === 'textarea' ? (
                     <textarea
-                      id={`cf-${field.name}`}
+                      id={fieldId(field.name)}
                       name={field.name}
                       rows={4}
                       required={field.required ?? false}
@@ -109,7 +125,7 @@ export function ContactFormFields({ form }: { form: Form }) {
                     />
                   ) : field.type === 'select' ? (
                     <select
-                      id={`cf-${field.name}`}
+                      id={fieldId(field.name)}
                       name={field.name}
                       required={field.required ?? false}
                       defaultValue=""
@@ -123,7 +139,7 @@ export function ContactFormFields({ form }: { form: Form }) {
                     </select>
                   ) : (
                     <input
-                      id={`cf-${field.name}`}
+                      id={fieldId(field.name)}
                       name={field.name}
                       type={field.type ?? 'text'}
                       required={field.required ?? false}
@@ -148,8 +164,8 @@ export function ContactFormFields({ form }: { form: Form }) {
               human cannot fill it in, so any value means an automated submission.
             */}
             <div aria-hidden="true" className="sdl-visually-hidden">
-              <label htmlFor="cf-website">Leave this empty</label>
-              <input id="cf-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+              <label htmlFor={fieldId('website')}>Leave this empty</label>
+              <input id={fieldId('website')} name="website" type="text" tabIndex={-1} autoComplete="off" />
             </div>
 
             <button type="submit" className="sdl-form-submit" disabled={state === 'submitting'}>
@@ -169,7 +185,7 @@ export function ContactFormFields({ form }: { form: Form }) {
           </form>
         ) : null}
 
-        <div className={`sdl-form-success${state === 'success' ? ' show' : ''}`} id="formSuccess" aria-live="polite">
+        <div className={`sdl-form-success${state === 'success' ? ' show' : ''}`} id={fieldId('success')} aria-live="polite">
           <div className="icon">
             <svg
               width="24"

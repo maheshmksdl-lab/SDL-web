@@ -2,6 +2,10 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 
+import type { Form } from '@/lib/payload-types'
+
+import { LetsTalkModal } from './lets-talk-modal'
+
 export type NavMenuItem = {
   title: string
   desc: string
@@ -32,15 +36,20 @@ export function HeaderNav({
   menus,
   megaMenuEnabled,
   cta,
+  letsTalkForm,
 }: {
   menus: NavMenu[]
   megaMenuEnabled: boolean
   cta: ({ label: string; href: string } & Record<string, unknown>) | null
+  /** Opened by `cta` as a popup, in place of navigating — see lets-talk-modal.tsx. */
+  letsTalkForm: Form | null
 }) {
   const [openKey, setOpenKey] = useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileSubKey, setMobileSubKey] = useState<string | null>(null)
   const [panelLeft, setPanelLeft] = useState<number | null>(null)
+  const [letsTalkOpen, setLetsTalkOpen] = useState(false)
+  const letsTalkTriggerRef = useRef<HTMLButtonElement>(null)
 
   const headerRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({})
@@ -101,6 +110,18 @@ export function HeaderNav({
 
   const hasDropdown = (menu: NavMenu) => megaMenuEnabled && menu.items.length > 0
 
+  const openLetsTalk = (event: React.MouseEvent<HTMLButtonElement>) => {
+    letsTalkTriggerRef.current = event.currentTarget
+    setMobileOpen(false)
+    setLetsTalkOpen(true)
+  }
+  const closeLetsTalk = useCallback(() => {
+    setLetsTalkOpen(false)
+    // Native dialog behaviour: focus returns to whichever button opened it, so a keyboard or
+    // screen-reader user is not dropped back at the top of the document.
+    letsTalkTriggerRef.current?.focus()
+  }, [])
+
   return (
     <>
       <div className="sdl-header-nav-wrap" ref={headerRef}>
@@ -143,9 +164,9 @@ export function HeaderNav({
 
       <div className="sdl-header-right">
         {cta ? (
-          <a href={cta.href} className="sdl-cta sdl-desktop-cta">
+          <button type="button" className="sdl-cta sdl-desktop-cta" onClick={openLetsTalk}>
             {cta.label} →
-          </a>
+          </button>
         ) : null}
 
         <button
@@ -256,11 +277,13 @@ export function HeaderNav({
         ))}
 
         {cta ? (
-          <a href={cta.href} className="sdl-mobile-cta">
+          <button type="button" className="sdl-mobile-cta" onClick={openLetsTalk}>
             {cta.label} →
-          </a>
+          </button>
         ) : null}
       </div>
+
+      <LetsTalkModal form={letsTalkForm} open={letsTalkOpen} onClose={closeLetsTalk} />
     </>
   )
 }

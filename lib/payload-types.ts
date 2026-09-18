@@ -1024,6 +1024,216 @@ export interface Page {
             blockType: 'contact-offices';
           }
         | {
+            title: string;
+            sub?: string | null;
+            /**
+             * Applies to this section only.
+             */
+            settings?: {
+              /**
+               * Lets links jump here, e.g. "capabilities" → /services#capabilities.
+               */
+              anchorId?: string | null;
+              /**
+               * Keeps the section and its content, but stops it rendering publicly.
+               */
+              hidden?: boolean | null;
+              background?: ('default' | 'white' | 'alt' | 'dark') | null;
+              spacing?: ('default' | 'tight' | 'flush') | null;
+              /**
+               * Uses the design’s scroll-reveal. Always disabled for visitors who prefer reduced motion.
+               */
+              reveal?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'page-intro';
+          }
+        | {
+            /**
+             * The small uppercase label above the title, e.g. "Capabilities".
+             */
+            kicker?: string | null;
+            title?: string | null;
+            sub?: string | null;
+            clientsTab?: {
+              type?: ('internal' | 'external' | 'anchor') | null;
+              /**
+               * Resolved to the page’s current URL, so renaming the page cannot break this link.
+               */
+              page?: (number | null) | Page;
+              /**
+               * Include the protocol, e.g. https://example.com.
+               */
+              url?: string | null;
+              /**
+               * A section’s anchor ID, without the #. For example: contact
+               */
+              anchor?: string | null;
+              newTab?: boolean | null;
+            };
+            testimonialsTab?: {
+              type?: ('internal' | 'external' | 'anchor') | null;
+              /**
+               * Resolved to the page’s current URL, so renaming the page cannot break this link.
+               */
+              page?: (number | null) | Page;
+              /**
+               * Include the protocol, e.g. https://example.com.
+               */
+              url?: string | null;
+              /**
+               * A section’s anchor ID, without the #. For example: contact
+               */
+              anchor?: string | null;
+              newTab?: boolean | null;
+            };
+            source?: ('auto' | 'manual') | null;
+            /**
+             * Off (default) shows every client. On shows only those marked "Featured".
+             */
+            featuredOnly?: boolean | null;
+            clients?: (number | Client)[] | null;
+            limit?: number | null;
+            /**
+             * Applies to this section only.
+             */
+            settings?: {
+              /**
+               * Lets links jump here, e.g. "capabilities" → /services#capabilities.
+               */
+              anchorId?: string | null;
+              /**
+               * Keeps the section and its content, but stops it rendering publicly.
+               */
+              hidden?: boolean | null;
+              background?: ('default' | 'white' | 'alt' | 'dark') | null;
+              spacing?: ('default' | 'tight' | 'flush') | null;
+              /**
+               * Uses the design’s scroll-reveal. Always disabled for visitors who prefer reduced motion.
+               */
+              reveal?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'clients-grid';
+          }
+        | {
+            /**
+             * The small uppercase label above the title, e.g. "Capabilities".
+             */
+            kicker?: string | null;
+            title?: string | null;
+            sub?: string | null;
+            clientsTab?: {
+              type?: ('internal' | 'external' | 'anchor') | null;
+              /**
+               * Resolved to the page’s current URL, so renaming the page cannot break this link.
+               */
+              page?: (number | null) | Page;
+              /**
+               * Include the protocol, e.g. https://example.com.
+               */
+              url?: string | null;
+              /**
+               * A section’s anchor ID, without the #. For example: contact
+               */
+              anchor?: string | null;
+              newTab?: boolean | null;
+            };
+            testimonialsTab?: {
+              type?: ('internal' | 'external' | 'anchor') | null;
+              /**
+               * Resolved to the page’s current URL, so renaming the page cannot break this link.
+               */
+              page?: (number | null) | Page;
+              /**
+               * Include the protocol, e.g. https://example.com.
+               */
+              url?: string | null;
+              /**
+               * A section’s anchor ID, without the #. For example: contact
+               */
+              anchor?: string | null;
+              newTab?: boolean | null;
+            };
+            source?: ('auto' | 'manual') | null;
+            /**
+             * Off (default) shows every testimonial. On shows only those marked "Featured".
+             */
+            featuredOnly?: boolean | null;
+            testimonials?: (number | Testimonial)[] | null;
+            limit?: number | null;
+            /**
+             * Applies to this section only.
+             */
+            settings?: {
+              /**
+               * Lets links jump here, e.g. "capabilities" → /services#capabilities.
+               */
+              anchorId?: string | null;
+              /**
+               * Keeps the section and its content, but stops it rendering publicly.
+               */
+              hidden?: boolean | null;
+              background?: ('default' | 'white' | 'alt' | 'dark') | null;
+              spacing?: ('default' | 'tight' | 'flush') | null;
+              /**
+               * Uses the design’s scroll-reveal. Always disabled for visitors who prefer reduced motion.
+               */
+              reveal?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials-grid';
+          }
+        | {
+            title?: string | null;
+            sub?: string | null;
+            cta?: {
+              /**
+               * The visible text, e.g. "Explore AI transformation".
+               */
+              label?: string | null;
+              type?: ('internal' | 'external' | 'anchor') | null;
+              /**
+               * Resolved to the page’s current URL, so renaming the page cannot break this link.
+               */
+              page?: (number | null) | Page;
+              /**
+               * Include the protocol, e.g. https://example.com.
+               */
+              url?: string | null;
+              /**
+               * A section’s anchor ID, without the #. For example: contact
+               */
+              anchor?: string | null;
+              newTab?: boolean | null;
+            };
+            /**
+             * Applies to this section only.
+             */
+            settings?: {
+              /**
+               * Lets links jump here, e.g. "capabilities" → /services#capabilities.
+               */
+              anchorId?: string | null;
+              /**
+               * Keeps the section and its content, but stops it rendering publicly.
+               */
+              hidden?: boolean | null;
+              background?: ('default' | 'white' | 'alt' | 'dark') | null;
+              spacing?: ('default' | 'tight' | 'flush') | null;
+              /**
+               * Uses the design’s scroll-reveal. Always disabled for visitors who prefer reduced motion.
+               */
+              reveal?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'success-cta';
+          }
+        | {
             kicker?: string | null;
             /**
              * The larger opening paragraph.
@@ -3203,11 +3413,19 @@ export interface Testimonial {
   id: number;
   name: string;
   /**
-   * The design uses this as a short headline, e.g. "Great flexibility!".
+   * The short headline on the card, e.g. "Great flexibility!".
    */
   role?: string | null;
+  /**
+   * The person’s title and company, shown under their name — e.g. "CEO at Happy Trails" or "from The Anglican Centre".
+   */
+  designation?: string | null;
   avatar?: (number | null) | Media;
   quote: string;
+  /**
+   * Stars shown on the card (1–5).
+   */
+  rating?: number | null;
   featured?: boolean | null;
   order?: number | null;
   updatedAt: string;
@@ -4209,6 +4427,130 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'page-intro'?:
+          | T
+          | {
+              title?: T;
+              sub?: T;
+              settings?:
+                | T
+                | {
+                    anchorId?: T;
+                    hidden?: T;
+                    background?: T;
+                    spacing?: T;
+                    reveal?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'clients-grid'?:
+          | T
+          | {
+              kicker?: T;
+              title?: T;
+              sub?: T;
+              clientsTab?:
+                | T
+                | {
+                    type?: T;
+                    page?: T;
+                    url?: T;
+                    anchor?: T;
+                    newTab?: T;
+                  };
+              testimonialsTab?:
+                | T
+                | {
+                    type?: T;
+                    page?: T;
+                    url?: T;
+                    anchor?: T;
+                    newTab?: T;
+                  };
+              source?: T;
+              featuredOnly?: T;
+              clients?: T;
+              limit?: T;
+              settings?:
+                | T
+                | {
+                    anchorId?: T;
+                    hidden?: T;
+                    background?: T;
+                    spacing?: T;
+                    reveal?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'testimonials-grid'?:
+          | T
+          | {
+              kicker?: T;
+              title?: T;
+              sub?: T;
+              clientsTab?:
+                | T
+                | {
+                    type?: T;
+                    page?: T;
+                    url?: T;
+                    anchor?: T;
+                    newTab?: T;
+                  };
+              testimonialsTab?:
+                | T
+                | {
+                    type?: T;
+                    page?: T;
+                    url?: T;
+                    anchor?: T;
+                    newTab?: T;
+                  };
+              source?: T;
+              featuredOnly?: T;
+              testimonials?: T;
+              limit?: T;
+              settings?:
+                | T
+                | {
+                    anchorId?: T;
+                    hidden?: T;
+                    background?: T;
+                    spacing?: T;
+                    reveal?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'success-cta'?:
+          | T
+          | {
+              title?: T;
+              sub?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    type?: T;
+                    page?: T;
+                    url?: T;
+                    anchor?: T;
+                    newTab?: T;
+                  };
+              settings?:
+                | T
+                | {
+                    anchorId?: T;
+                    hidden?: T;
+                    background?: T;
+                    spacing?: T;
+                    reveal?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         narrative?:
           | T
           | {
@@ -4864,8 +5206,10 @@ export interface ClientsSelect<T extends boolean = true> {
 export interface TestimonialsSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  designation?: T;
   avatar?: T;
   quote?: T;
+  rating?: T;
   featured?: T;
   order?: T;
   updatedAt?: T;

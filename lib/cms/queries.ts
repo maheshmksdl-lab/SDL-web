@@ -215,11 +215,11 @@ export async function getInsightCategories(): Promise<InsightCategory[]> {
   return result.docs
 }
 
-export async function getClients(featuredOnly = true): Promise<Client[]> {
+export async function getClients(featuredOnly = true, limit = 24): Promise<Client[]> {
   const result = await cmsFetch<Paginated<Client>>(
     `/api/clients${query({
       where: featuredOnly ? { featured: { equals: true } } : undefined,
-      sort: 'order', limit: 24, depth: 1,
+      sort: 'order', limit, depth: 1,
     })}`,
     { tags: [tags.clients], fallback: emptyPage as Paginated<Client> },
   )

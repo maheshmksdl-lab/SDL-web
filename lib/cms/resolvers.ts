@@ -59,6 +59,18 @@ const blockResolvers: Partial<Record<string, Resolver>> = {
     return { clients: await getClients(true) }
   },
 
+  'clients-grid': async (block) => {
+    if (field<string>(block, 'source') === 'manual') return {}
+    const featuredOnly = field<boolean>(block, 'featuredOnly') ?? false
+    return { clients: await getClients(featuredOnly, field<number>(block, 'limit') ?? 100) }
+  },
+
+  'testimonials-grid': async (block) => {
+    if (field<string>(block, 'source') === 'manual') return {}
+    const featuredOnly = field<boolean>(block, 'featuredOnly') ?? false
+    return { testimonials: await getTestimonials(featuredOnly, field<number>(block, 'limit') ?? 100) }
+  },
+
   'case-study': async (block) => {
     if (field<string>(block, 'source') !== 'reference') return {}
     const id = idOf(field(block, 'study'))

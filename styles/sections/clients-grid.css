@@ -1,0 +1,55 @@
+/* clients-grid — the full client logo wall on the Clients page. */
+
+.sdl-clients-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.sdl-client-card {
+  background: #FFFFFF;
+  border: 1px solid #EEF1F6;
+  border-radius: 14px;
+  padding: 24px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.sdl-client-card:hover {
+  border-color: #DCE2EE;
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.06);
+  transform: translateY(-2px);
+}
+
+.sdl-client-card a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sdl-client-card img {
+  max-width: 100%;
+  max-height: 72px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1060px) {
+  .sdl-clients-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 780px) {
+  .sdl-clients-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .sdl-client-card { height: 108px; padding: 18px; }
+}
+
+@media (max-width: 480px) {
+  .sdl-clients-grid { grid-template-columns: 1fr; }
+}

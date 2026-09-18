@@ -3,8 +3,12 @@ import Link from 'next/link'
 import type { Header as HeaderGlobal } from '@/lib/payload-types'
 import { anchorForPage, resolveLink, resolveMedia } from '@/lib/links'
 import { getIcon } from '@/lib/registries/icons'
+import { getForm } from '@/lib/cms/queries'
 
 import { HeaderNav, type NavMenu } from './header-nav'
+
+/** The form the header's CTA opens as a popup — see header-nav.tsx and lets-talk-modal.tsx. */
+const LETS_TALK_FORM_SLUG = 'contact-us'
 
 /**
  * The sticky header.
@@ -17,7 +21,7 @@ import { HeaderNav, type NavMenu } from './header-nav'
  * style is in the design, so it is reproduced rather than moved into CSS: the parity harness
  * compares computed styles and DOM shape, and "tidying" it would show up as a difference.
  */
-export function SiteHeader({
+export async function SiteHeader({
   header,
   variant = 'default',
   pageAnchors = new Set(),
@@ -28,6 +32,13 @@ export function SiteHeader({
   /** Section anchors the current page renders — see `anchorForPage`. */
   pageAnchors?: ReadonlySet<string>
 }) {
+  // Fetched here rather than passed in, so every one of the header's three call sites gets the
+  // popup for free — the same reasoning `getHeader`/`getFooter` themselves are read where used,
+  // not threaded through every route. `getForm` is not cache()-wrapped, but `cmsFetch` sits on
+  // Next's own per-request fetch dedupe, so this costs nothing extra on the Contact Us page,
+  // which reads the same record for its own (differently-styled) enquiry form.
+  const letsTalkForm = await getForm(LETS_TALK_FORM_SLUG)
+
   const logo = resolveMedia(header.logo)
   const cta = resolveLink(header.cta)
   const href = (link: { href: string } | null) => (link ? anchorForPage(link.href, pageAnchors) : null)
@@ -87,6 +98,7 @@ export function SiteHeader({
           menus={menus}
           megaMenuEnabled={header.megaMenuEnabled !== false}
           cta={cta ? { label: cta.label, href: href(cta)! } : null}
+          letsTalkForm={letsTalkForm}
         />
       </div>
     </header>

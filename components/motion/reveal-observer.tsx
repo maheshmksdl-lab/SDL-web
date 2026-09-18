@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 /**
  * Scroll-reveal, ported from the design's `initScrollReveal`.
@@ -13,6 +14,21 @@ import { useEffect } from 'react'
  * `.is-visible`, then unobserve. The CSS (chrome.css) owns the animation and the staggering.
  */
 export function RevealObserver() {
+  /*
+   * `usePathname()` as the effect's dependency, not "no array".
+   *
+   * The App Router keeps this root layout mounted across a client-side navigation — that is the
+   * whole point of a layout — so the component itself never unmounts and, with no dependency
+   * array, the effect only re-ran on the very first mount. Every page reached via `next/link`
+   * (or the browser back/forward buttons, which the router also intercepts) rendered its
+   * `.reveal` / `.reveal-group` elements at `opacity: 0` with no observer ever watching them —
+   * permanently invisible until a hard reload remounted the layout from scratch. `usePathname()`
+   * changes on every one of those transitions, so listing it here makes the effect re-run (and
+   * the cleanup below tear down the previous observer) exactly when a new page's elements need
+   * to be (re)watched.
+   */
+  const pathname = usePathname()
+
   useEffect(() => {
     const targets = document.querySelectorAll('.reveal, .reveal-group')
     if (!targets.length) return
@@ -46,17 +62,10 @@ export function RevealObserver() {
     )
 
     targets.forEach((el) => observer.observe(el))
+    // Tears down THIS pathname's observer before the effect re-runs for the next one, so
+    // observers never accumulate across a session of client-side navigations.
     return () => observer.disconnect()
-    /*
-     * No dependency array, deliberately.
-     *
-     * This component takes no props and renders null, so it only re-runs when the layout
-     * re-renders — which is exactly what a client-side navigation does. Re-running is required
-     * there: the new page's `.reveal` elements did not exist when the previous observer was
-     * created, and with `[]` they would stay at opacity 0 forever. The cleanup disconnects the
-     * old observer first, so observers never accumulate.
-     */
-  })
+  }, [pathname])
 
   return null
 }

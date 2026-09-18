@@ -64,6 +64,11 @@
 
 /* Blocks built after the design extraction, with no design source to keep in step with. */
 @import '../styles/sections/contact-offices.css';
+@import '../styles/sections/page-intro.css';
+@import '../styles/sections/company.css';
+@import '../styles/sections/clients-grid.css';
+@import '../styles/sections/testimonials-grid.css';
+@import '../styles/sections/success-cta.css';
 
 @import '../styles/variants.css';
 

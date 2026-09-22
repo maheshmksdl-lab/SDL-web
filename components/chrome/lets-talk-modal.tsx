@@ -5,6 +5,15 @@ import { createPortal } from 'react-dom'
 
 import type { Form } from '@/lib/payload-types'
 import { ContactFormFields } from '@/components/sections/contact-form/form-fields'
+import { AccentLines, type HeadingLine } from '@/components/ui/primitives'
+
+/**
+ * The popup's own heading — matching the home page's "Have an outcome in mind?" contact section
+ * (same two-line plain-then-accent treatment, via the same `AccentLines` primitive) rather than
+ * the flat single-line title this popup used to show. Fixed content, not CMS-driven: this is the
+ * one sitewide popup, not a per-page block, so there's no per-instance value to source it from.
+ */
+const MODAL_HEADING_LINES: HeadingLine[] = [{ before: 'Have an outcome' }, { accent: 'in mind?' }]
 
 /**
  * The "Let's talk" popup, opened from the header's CTA (see header-nav.tsx).
@@ -91,9 +100,7 @@ export function LetsTalkModal({
         ref={dialogRef}
       >
         <div className="sdl-modal-head">
-          <span id={titleId} className="sdl-modal-title">
-            {form?.cardTitle || "Let's Talk"}
-          </span>
+          <AccentLines lines={MODAL_HEADING_LINES} id={titleId} className="sdl-modal-title" />
           <button type="button" className="sdl-modal-close" onClick={onClose} aria-label="Close">
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M2 2l12 12M14 2 2 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />

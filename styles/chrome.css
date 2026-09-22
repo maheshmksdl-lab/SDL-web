@@ -169,6 +169,8 @@
   color: #162833;
 }
 
+.sdl-modal-title .accent { color: var(--accent); }
+
 .sdl-modal-close {
   display: flex;
   align-items: center;

@@ -194,14 +194,16 @@ export function AccentLines({
   lines,
   as: Tag = 'div',
   className,
+  id,
 }: {
   lines?: HeadingLine[] | null
   as?: 'div' | 'h1' | 'h2'
   className?: string
+  id?: string
 }) {
   if (!lines?.length) return null
   return (
-    <Tag className={className}>
+    <Tag id={id} className={className}>
       {lines.map((line, index) => (
         <div key={line.id ?? index}>
           {line.before}

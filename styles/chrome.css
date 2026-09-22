@@ -268,6 +268,12 @@
 .sdl-logo-strip {
     margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr);
     border: 1px solid #E4E9F2; background: #E4E9F2; gap: 1px; border-radius: 4px; overflow: hidden;
+    /* Clip to exactly 2 rows of cells (104px each + 1px gap), whatever the client count and
+       column count are — the homepage teases the logo wall, the full set lives on /clients.
+       A max-height clip rather than slicing the client list in JS: it holds at exactly 2 rows
+       across every breakpoint's column count (3 cols desktop, 2 cols mobile) with no per-
+       breakpoint item-count math, and leaves the CMS data/relationships untouched. */
+    max-height: 211px;
   }
 
 .sdl-logo-cell { background: #FFFFFF; height: 104px; display: flex; align-items: center; justify-content: center; padding: 14px; }

@@ -318,7 +318,7 @@ export function InsightsExplorer({
                           />
                           <span className="sdl-insights-option__box" aria-hidden="true" />
                           <span className="sdl-insights-option__label">{option.label}</span>
-                          <span className="sdl-insights-option__count">{option.count}</span>
+                          <span className="sdl-insights-option__count">({option.count})</span>
                         </label>
                       </li>
                     )

@@ -7,7 +7,5 @@
 * { box-sizing: border-box; }
 
 body { margin: 0; background: #F6F8FC; overflow-x: hidden; font-family: var(--font-inter), 'Inter', sans-serif; }
-
 a { color: var(--accent); text-decoration: none; }
 
-a:hover { color: var(--accent-hover); }

@@ -104,7 +104,9 @@ export function ClientsGrid(props: Record<string, unknown>) {
 
       <div className="sdl-clients-grid reveal-group">
         {clients.map((client) => {
-          const logo = resolveMedia(client.logo, 'logo')
+          // The original, not the `logo` derivative: derivatives generated before the CMS filled
+          // their letterbox white carry black bars on every non-2:1 logo.
+          const logo = resolveMedia(client.logo)
           if (!logo) return null
           const inner = (
             <Image src={logo.src} alt={client.name} width={logo.width ?? 200} height={logo.height ?? 100} loading="lazy" />

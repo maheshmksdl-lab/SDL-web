@@ -406,7 +406,8 @@ export function Proof(props: Record<string, unknown>) {
           {block.blockTitle ? <div className="sdl-proof-block-title">{block.blockTitle}</div> : null}
           <div className="sdl-logo-strip reveal-group" id="logoStrip">
             {clients.map((client) => {
-              const logo = resolveMedia(client.logo, 'logo')
+              // The original, not the `logo` derivative — see the clients grid in company-sections.
+              const logo = resolveMedia(client.logo)
               if (!logo) return null
               return (
                 <div className="sdl-logo-cell" key={client.id}>

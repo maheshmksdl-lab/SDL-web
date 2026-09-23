@@ -68,6 +68,27 @@ const nextConfig: NextConfig = {
    * it relies on Babel, which slows dev and build. See plan §6.12.
    */
 
+  /*
+   * Prerender throttling, so a production build cannot exhaust the CMS database's connections.
+   *
+   * Every page rendered here fetches from the live CMS, and each CMS invocation opens its own
+   * Postgres pool (cms/payload.config.ts sizes it at 2). Parallel workers therefore multiply
+   * into real connection slots on a managed database that has few of them. Observed: a build
+   * died on /insights/[slug] with "CMS responded 500" at 11:46:19 while a direct psql connection
+   * 25 seconds later was refused with "remaining connection slots are reserved for roles with
+   * the SUPERUSER attribute" — the same exhaustion, seen from two sides.
+   *
+   * Lower concurrency and a higher pages-per-worker threshold keep this build to fewer workers
+   * doing less at once; the retry count covers a blip that throttling alone does not prevent.
+   * The client's own retry (lib/cms/client.ts) backs off in under a second, which is far too
+   * short for connection starvation — this is the layer that can actually wait it out.
+   */
+  experimental: {
+    staticGenerationRetryCount: 3,
+    staticGenerationMaxConcurrency: 4,
+    staticGenerationMinPagesPerWorker: 50,
+  },
+
   images: {
     // remotePatterns, never the deprecated images.domains.
     remotePatterns: [

@@ -64,6 +64,24 @@ function isRetriableStatus(status?: number): boolean {
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
+/**
+ * Backoff for a retriable status, in milliseconds.
+ *
+ * During a production build there is no user waiting, and the failure that actually kills builds
+ * is Postgres connection starvation on the CMS — the pool is saturated for SECONDS, so the 300ms
+ * and 600ms steps used at runtime are all spent before a slot could ever free up. Backing off for
+ * ~1s, 3s then 7s outlasts a burst without meaningfully lengthening the build.
+ *
+ * At runtime the short steps stay: a visitor is waiting on this request, and the page has a
+ * fallback. Same reasoning as ECONNREFUSED above — do not make someone wait for a retry that is
+ * unlikely to help them.
+ */
+const isBuild = process.env.NEXT_PHASE === 'phase-production-build'
+
+function backoffFor(attempt: number): number {
+  return isBuild ? [1_000, 3_000, 7_000][attempt - 1] ?? 7_000 : 300 * attempt
+}
+
 export class CmsError extends Error {
   constructor(
     message: string,
@@ -196,7 +214,9 @@ export async function cmsFetch<T>(path: string, options: FetchOptions<T> = {}): 
           },
         }
 
-  const maxAttempts = 3
+  // One extra attempt during a build: cheap there, and the difference between a deploy that
+  // ships and one that dies on a single transient 500.
+  const maxAttempts = isBuild ? 4 : 3
   let lastError: unknown
 
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
@@ -210,8 +230,11 @@ export async function cmsFetch<T>(path: string, options: FetchOptions<T> = {}): 
         // content, which is how a cold CMS turns into an empty page strip on the live site.
         if (isRetriableStatus(res.status) && attempt < maxAttempts) {
           lastError = error
-          console.warn(`[cms] ${path} → ${res.status}, retrying (${attempt}/${maxAttempts - 1})`)
-          await delay(300 * attempt)
+          const wait = backoffFor(attempt)
+          console.warn(
+            `[cms] ${path} → ${res.status}, retrying in ${wait}ms (${attempt}/${maxAttempts - 1})`,
+          )
+          await delay(wait)
           continue
         }
 
